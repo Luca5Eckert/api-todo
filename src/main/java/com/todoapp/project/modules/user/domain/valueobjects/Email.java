@@ -15,8 +15,7 @@ public class Email {
         if(value.isBlank()){
             throw new UserEmailBlankException("User email can not be blank");
         }
-        Matcher matcher = VALID_EMAIL.matcher(value);
-        if(!matcher.matches()){
+        if(isValid(value)){
             throw new UserEmailSintaxeException("Email sintaxe is invalid");
         }
         this.value = value;
@@ -30,10 +29,15 @@ public class Email {
         if(value.isBlank()){
             throw new UserEmailBlankException("User email can not be blank");
         }
-        Matcher matcher = VALID_EMAIL.matcher(value);
-        if(!matcher.matches()){
+        if(isValid(value)){
             throw new UserEmailSintaxeException("Email sintaxe is invalid");
         }
         this.value = value;
     }
+
+    private boolean isValid(String value){
+        Matcher matcher = VALID_EMAIL.matcher(value);
+        return matcher.matches();
+    }
+
 }
