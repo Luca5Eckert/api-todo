@@ -1,6 +1,7 @@
 package com.todoapp.project.modules.user.domain;
 
 import com.todoapp.project.modules.user.domain.enums.TypeUser;
+import com.todoapp.project.modules.user.domain.valueobjects.Name;
 import jakarta.persistence.*;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
@@ -15,7 +16,7 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private final UUID id;
 
-    private String name;
+    private Name name;
 
     private String email;
 
@@ -44,7 +45,7 @@ public class UserEntity {
         this.version = -1;
     }
 
-    public UserEntity(UUID id, String name, String email, String password, TypeUser type, LocalDateTime createAt, LocalDateTime updateAt, long version) {
+    public UserEntity(UUID id, Name name, String email, String password, TypeUser type, LocalDateTime createAt, LocalDateTime updateAt, long version) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -59,11 +60,11 @@ public class UserEntity {
         return id;
     }
 
-    public String getName() {
+    public Name getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(Name name) {
         this.name = name;
     }
 
