@@ -1,6 +1,7 @@
 package com.todoapp.project.modules.user.domain;
 
 import com.todoapp.project.modules.user.domain.enums.TypeUser;
+import com.todoapp.project.modules.user.domain.valueobjects.Email;
 import com.todoapp.project.modules.user.domain.valueobjects.Name;
 import jakarta.persistence.*;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -18,7 +19,7 @@ public class UserEntity {
 
     private Name name;
 
-    private String email;
+    private Email email;
 
     private String password;
 
@@ -45,7 +46,7 @@ public class UserEntity {
         this.version = -1;
     }
 
-    public UserEntity(UUID id, Name name, String email, String password, TypeUser type, LocalDateTime createAt, LocalDateTime updateAt, long version) {
+    public UserEntity(UUID id, Name name, Email email, String password, TypeUser type, LocalDateTime createAt, LocalDateTime updateAt, long version) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -68,11 +69,11 @@ public class UserEntity {
         this.name = name;
     }
 
-    public String getEmail() {
+    public Email getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(Email email) {
         this.email = email;
     }
 
