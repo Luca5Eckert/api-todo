@@ -57,6 +57,13 @@ public class UserEntity {
         this.version = version;
     }
 
+    public boolean canCreateUser() {
+        return switch (type){
+            case ADMIN -> true;
+            default -> false;
+        };
+    }
+
     public UUID getId() {
         return id;
     }
@@ -112,7 +119,6 @@ public class UserEntity {
     public void setVersion(long version) {
         this.version = version;
     }
-
 
 
 
