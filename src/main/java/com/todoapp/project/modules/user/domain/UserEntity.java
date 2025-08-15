@@ -57,6 +57,17 @@ public class UserEntity {
         this.version = version;
     }
 
+
+    public UserEntity(Name name, Email email, String password, TypeUser typeUser) {
+        this.id = null;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.type = typeUser;
+        this.createAt = LocalDateTime.now();
+        this.updateAt = LocalDateTime.now();
+    }
+
     public boolean canCreateUser() {
         return switch (type){
             case ADMIN -> true;
