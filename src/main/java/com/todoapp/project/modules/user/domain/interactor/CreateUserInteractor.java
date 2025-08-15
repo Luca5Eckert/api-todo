@@ -13,12 +13,12 @@ import org.springframework.stereotype.Component;
 import java.util.UUID;
 
 @Component
-public class CreateUseInteractor implements CreateUserCase  {
+public class CreateUserInteractor implements CreateUserCase  {
 
     private final UserRepository userRepository;
     private final UserCreateMapper userCreateMapper;
 
-    public CreateUseInteractor(UserRepository userRepository, UserCreateMapper userCreateMapper) {
+    public CreateUserInteractor(UserRepository userRepository, UserCreateMapper userCreateMapper) {
         this.userRepository = userRepository;
         this.userCreateMapper = userCreateMapper;
     }
