@@ -8,4 +8,6 @@ public interface UserRepository {
 
     UserEntity findById(UUID id);
 
+    void save(UserEntity userEntity);
+
 }
