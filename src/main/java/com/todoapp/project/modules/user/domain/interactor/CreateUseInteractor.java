@@ -1,7 +1,9 @@
 package com.todoapp.project.modules.user.domain.interactor;
 
 
+import com.todoapp.project.infrastructure.persistence.mappers.UserCreateMapper;
 import com.todoapp.project.modules.user.aplication.dto.create.UserCreateRequest;
+import com.todoapp.project.modules.user.aplication.dto.create.UserCreateResponse;
 import com.todoapp.project.modules.user.domain.UserEntity;
 import com.todoapp.project.modules.user.domain.cases.CreateUserCase;
 import com.todoapp.project.modules.user.domain.exceptions.create.UserCreateValidationException;
@@ -14,20 +16,24 @@ import java.util.UUID;
 public class CreateUseInteractor implements CreateUserCase  {
 
     private final UserRepository userRepository;
+    private final UserCreateMapper userCreateMapper;
 
-    public CreateUseInteractor(UserRepository userRepository) {
+    public CreateUseInteractor(UserRepository userRepository, UserCreateMapper userCreateMapper) {
         this.userRepository = userRepository;
+        this.userCreateMapper = userCreateMapper;
     }
 
     @Override
-    public UserCreateRequest createUser(UserCreateRequest userCreateRequest, UUID id) {
+    public UserCreateResponse createUser(UserCreateRequest userCreateRequest, UUID id) {
         UserEntity user = userRepository.findById(id);
 
         validUserPermission(user);
 
+        UserEntity userToCreate = userCreateMapper.toEntity(userCreateRequest);
 
+        userRepository.save(userToCreate);
 
-        return null;
+        return userCreateMapper.toResponse(userToCreate);
     }
 
     private void validUserPermission(UserEntity user){
