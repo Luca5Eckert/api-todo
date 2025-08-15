@@ -6,7 +6,9 @@ import com.todoapp.project.modules.user.domain.UserEntity;
 import com.todoapp.project.modules.user.domain.enums.TypeUser;
 import com.todoapp.project.modules.user.domain.valueobjects.Email;
 import com.todoapp.project.modules.user.domain.valueobjects.Name;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UserCreateMapper {
 
     public UserEntity toEntity(UserCreateRequest userCreateRequest){
