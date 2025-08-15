@@ -15,7 +15,7 @@ public class Email {
         if(value.isBlank()){
             throw new UserEmailBlankException("User email can not be blank");
         }
-        if(isValid(value)){
+        if(!isValid(value)){
             throw new UserEmailSintaxeException("Email sintaxe is invalid");
         }
         this.value = value;
@@ -23,16 +23,6 @@ public class Email {
 
     public String getValue() {
         return value;
-    }
-
-    public void setValue(String value) {
-        if(value.isBlank()){
-            throw new UserEmailBlankException("User email can not be blank");
-        }
-        if(isValid(value)){
-            throw new UserEmailSintaxeException("Email sintaxe is invalid");
-        }
-        this.value = value;
     }
 
     private boolean isValid(String value){
