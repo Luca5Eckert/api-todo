@@ -85,5 +85,19 @@ class JpaUserRepositoryAdapterTest {
         // Then
         verify(jpaUserRepository, times(1)).save(userEntityToSave);
     }
+
+    @Test
+    @DisplayName("Deve deletar o usuário com sucesso")
+    void shouldCallDeleteByIdOnJpaRepository() {
+        // Arrange
+        UUID id = UUID.randomUUID();
+
+        // Act
+        jpaUserRepositoryAdapter.deleteById(id);
+
+        // Assert
+        verify(jpaUserRepository).deleteById(id);
+    }
+
 }
 

@@ -21,4 +21,9 @@ public class JpaUserRepositoryAdapter implements UserRepository {
     public void save(UserEntity userEntity) {
         jpaUserRepository.save(userEntity);
     }
+
+    @Override
+    public void deleteById(UUID id) {
+        jpaUserRepository.deleteById(id);
+    }
 }
