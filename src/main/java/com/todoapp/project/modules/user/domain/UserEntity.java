@@ -75,6 +75,14 @@ public class UserEntity {
         };
     }
 
+    public boolean canDeleteUser() {
+        return switch (type){
+            case ADMIN -> true;
+            default -> false;
+        };
+
+    }
+
     public UUID getId() {
         return id;
     }
