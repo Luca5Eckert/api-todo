@@ -10,4 +10,6 @@ public interface UserRepository {
 
     void save(UserEntity userEntity);
 
+    void deleteById(UUID id);
+
 }
