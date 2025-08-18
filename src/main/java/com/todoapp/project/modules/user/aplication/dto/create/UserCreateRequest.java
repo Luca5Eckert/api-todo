@@ -1,4 +1,6 @@
 package com.todoapp.project.modules.user.aplication.dto.create;
 
-public record UserCreateRequest(String name, String email, String password) {
+import jakarta.validation.constraints.NotBlank;
+
+public record UserCreateRequest(@NotBlank String name, @NotBlank String email, @NotBlank String password) {
 }
