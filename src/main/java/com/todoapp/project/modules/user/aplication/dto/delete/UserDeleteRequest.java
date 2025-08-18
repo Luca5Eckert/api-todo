@@ -1,6 +1,8 @@
 package com.todoapp.project.modules.user.aplication.dto.delete;
 
+import jakarta.validation.constraints.NotBlank;
+
 import java.util.UUID;
 
-public record UserDeleteRequest(UUID id) {
+public record UserDeleteRequest(@NotBlank UUID id) {
 }

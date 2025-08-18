@@ -9,7 +9,7 @@ import com.todoapp.project.modules.user.domain.port.UserRepository;
 import java.util.UUID;
 
 /**
- * Esse caso de uso é responsavel por deletar os usuários
+ * Esse interactor é responsavel por deletar os usuários
  *
  * <p>Esse interador valida se o usuário que quer executar
  * tem permissão para deletar outro usuário antes de deletar
