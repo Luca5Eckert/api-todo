@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -83,6 +84,13 @@ public class UserEntity {
 
     }
 
+    public boolean canEditUser() {
+        return switch (type){
+            case ADMIN -> true;
+            default -> false;
+        };
+    }
+
     public UUID getId() {
         return id;
     }
@@ -140,5 +148,15 @@ public class UserEntity {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        UserEntity user = (UserEntity) o;
+        return version == user.version && Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && type == user.type && Objects.equals(createAt, user.createAt) && Objects.equals(updateAt, user.updateAt);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, email, password, type, createAt, updateAt, version);
+    }
 }
