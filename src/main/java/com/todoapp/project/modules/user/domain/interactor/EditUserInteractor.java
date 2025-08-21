@@ -8,6 +8,7 @@ import com.todoapp.project.modules.user.domain.UserEntity;
 import com.todoapp.project.modules.user.domain.cases.EditUserCase;
 import com.todoapp.project.modules.user.domain.exceptions.edit.UserEditValidationException;
 import com.todoapp.project.modules.user.domain.port.UserRepository;
+import jakarta.transaction.Transactional;
 
 import java.util.UUID;
 
@@ -53,6 +54,7 @@ public class EditUserInteractor implements EditUserCase {
      * @param idUser Id do usuário que será editado
      * @return UserEditResponse classe que contém as informações novas do usuário
      */
+    @Transactional
     @Override
     public UserEditResponse execute(UserEditRequest editRequest, UUID idExecuter, UUID idUser) {
         UserEntity userExecuter = userRepository.findById(idExecuter).orElseThrow(() -> new UserNotFoundByIdException("User not found by id: " + idExecuter));;
