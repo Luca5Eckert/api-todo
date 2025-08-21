@@ -3,6 +3,7 @@ package com.todoapp.project.modules.user.domain.interactor;
 import com.todoapp.project.infrastructure.persistence.user.mappers.UserEditMapper;
 import com.todoapp.project.modules.user.aplication.dto.edit.UserEditRequest;
 import com.todoapp.project.modules.user.aplication.dto.edit.UserEditResponse;
+import com.todoapp.project.modules.user.aplication.exception.UserNotFoundByIdException;
 import com.todoapp.project.modules.user.domain.UserEntity;
 import com.todoapp.project.modules.user.domain.cases.EditUserCase;
 import com.todoapp.project.modules.user.domain.exceptions.edit.UserEditValidationException;
@@ -24,8 +25,8 @@ public class EditUserInteractor implements EditUserCase {
 
     @Override
     public UserEditResponse execute(UserEditRequest editRequest, UUID idExecuter, UUID idUser) {
-        UserEntity userExecuter = userRepository.findById(idExecuter);
-        UserEntity userEdit = userRepository.findById(idExecuter);
+        UserEntity userExecuter = userRepository.findById(idExecuter).orElseThrow(() -> new UserNotFoundByIdException("User not found by id"));;
+        UserEntity userEdit = userRepository.findById(idUser).orElseThrow(() -> new UserNotFoundByIdException("User not found by id"));;
 
         validPermission(userEdit, userExecuter);
 

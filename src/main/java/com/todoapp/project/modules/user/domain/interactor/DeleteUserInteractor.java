@@ -1,6 +1,7 @@
 package com.todoapp.project.modules.user.domain.interactor;
 
 import com.todoapp.project.modules.user.aplication.dto.delete.UserDeleteRequest;
+import com.todoapp.project.modules.user.aplication.exception.UserNotFoundByIdException;
 import com.todoapp.project.modules.user.domain.UserEntity;
 import com.todoapp.project.modules.user.domain.cases.DeleteUserCase;
 import com.todoapp.project.modules.user.domain.exceptions.delete.UserDeleteValidationException;
@@ -42,7 +43,7 @@ public class DeleteUserInteractor implements DeleteUserCase {
      */
     @Override
     public void execute(UserDeleteRequest userDeleteRequest, UUID id) {
-        UserEntity userExecuter = userRepository.findById(id);
+        UserEntity userExecuter = userRepository.findById(id).orElseThrow(() -> new UserNotFoundByIdException("User not found by id"));;
 
         validUserPermissions(userExecuter);
 
