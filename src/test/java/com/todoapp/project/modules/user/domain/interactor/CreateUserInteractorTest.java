@@ -76,7 +76,7 @@ class CreateUserInteractorTest {
         when(userCreateMapper.toEntity(userCreateRequest)).thenReturn(newUser);
         when(userCreateMapper.toResponse(newUser)).thenReturn(userCreateResponse);
 
-        UserCreateResponse response = createUseInteractor.createUser(userCreateRequest, authorizedUserId);
+        UserCreateResponse response = createUseInteractor.execute(userCreateRequest, authorizedUserId);
 
         verify(userRepository).findById(authorizedUserId);
         verify(userRepository).save(newUser);
@@ -100,7 +100,7 @@ class CreateUserInteractorTest {
         when(userRepository.findById(any(UUID.class))).thenReturn(Optional.of(unauthorizedUser));
 
         assertThrows(UserCreateValidationException.class, () -> {
-            createUseInteractor.createUser(userCreateRequest, unauthorizedUser.getId());
+            createUseInteractor.execute(userCreateRequest, unauthorizedUser.getId());
         });
 
         verify(userRepository, never()).save(any(UserEntity.class));
@@ -112,7 +112,7 @@ class CreateUserInteractorTest {
         when(userRepository.findById(any(UUID.class))).thenReturn(Optional.empty());
 
         assertThrows(UserNotFoundByIdException.class, () -> {
-            createUseInteractor.createUser(userCreateRequest, authorizedUserId);
+            createUseInteractor.execute(userCreateRequest, authorizedUserId);
         });
 
         verify(userRepository, never()).save(any(UserEntity.class));
