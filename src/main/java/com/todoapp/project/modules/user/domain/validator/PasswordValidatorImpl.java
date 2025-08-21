@@ -1,6 +1,5 @@
-package com.todoapp.project.infrastructure.validator;
+package com.todoapp.project.modules.user.domain.validator;
 
-import com.todoapp.project.modules.user.domain.port.PasswordValidator;
 import com.todoapp.project.modules.user.domain.exceptions.password.PasswordValidException;
 
 import java.util.regex.Pattern;

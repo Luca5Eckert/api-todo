@@ -1,4 +1,4 @@
-package com.todoapp.project.modules.user.domain.port;
+package com.todoapp.project.modules.user.domain.validator;
 
 public interface PasswordValidator {
 
