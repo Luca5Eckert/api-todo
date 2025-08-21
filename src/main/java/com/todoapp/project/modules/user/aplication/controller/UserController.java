@@ -26,7 +26,7 @@ public class UserController {
     public ResponseEntity<?> createUser(@RequestBody @Valid UserCreateRequest userCreateRequest){
         //Gera um id generico para fins de testes
         UUID id = UUID.randomUUID();
-        UserCreateResponse userCreateResponse = createUserCase.createUser(userCreateRequest, id);
+        UserCreateResponse userCreateResponse = createUserCase.execute(userCreateRequest, id);
         return ResponseEntity.ok(userCreateResponse);
     }
 

@@ -25,7 +25,7 @@ public class CreateUserInteractor implements CreateUserCase  {
     }
 
     @Override
-    public UserCreateResponse createUser(UserCreateRequest userCreateRequest, UUID id) {
+    public UserCreateResponse execute(UserCreateRequest userCreateRequest, UUID id) {
         UserEntity user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundByIdException("User not found by id"));;
 
         validUserPermission(user);

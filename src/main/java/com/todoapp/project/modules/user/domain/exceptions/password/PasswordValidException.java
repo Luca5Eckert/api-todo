@@ -1,6 +1,8 @@
 package com.todoapp.project.modules.user.domain.exceptions.password;
 
-public class PasswordValidException extends RuntimeException {
+import com.todoapp.project.modules.user.domain.exceptions.UserException;
+
+public class PasswordValidException extends UserException {
     public PasswordValidException(String message) {
         super(message);
     }

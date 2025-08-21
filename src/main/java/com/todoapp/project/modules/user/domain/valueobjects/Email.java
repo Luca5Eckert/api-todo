@@ -1,7 +1,7 @@
 package com.todoapp.project.modules.user.domain.valueobjects;
 
-import com.todoapp.project.modules.user.domain.exceptions.UserEmailBlankException;
-import com.todoapp.project.modules.user.domain.exceptions.UserEmailSintaxeException;
+import com.todoapp.project.modules.user.domain.exceptions.email.UserEmailBlankException;
+import com.todoapp.project.modules.user.domain.exceptions.email.UserEmailSintaxeException;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
