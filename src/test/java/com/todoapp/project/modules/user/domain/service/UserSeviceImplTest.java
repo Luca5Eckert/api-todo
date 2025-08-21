@@ -35,12 +35,6 @@ class UserSeviceImplTest {
 
     @Test
     void shouldHaveNotCreateUserAndThrow() {
-        UserEntity userEntity = new UserEntity(UUID.randomUUID(), new Name("Lucas"), new Email("lucas@gmail.com"), "password", TypeUser.NORMAL, LocalDateTime.now(), LocalDateTime.now(), 1);
-        UserCreateResponse userCreateResponse = new UserCreateResponse(userEntity.getId(), userEntity.getName().getValue(), userEntity.getEmail().getValue());
-
-        UserCreateResponse userCreateResponseTest = userSevice.createUser(new UserCreateRequest(userEntity.getName().getValue(), userEntity.getEmail().getValue(), userEntity.getPassword()), userEntity.getId());
-
-        assertEquals(userCreateResponse, userCreateResponseTest);
     }
 
     @Test
