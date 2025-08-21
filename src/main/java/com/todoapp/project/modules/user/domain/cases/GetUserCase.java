@@ -16,7 +16,6 @@ public interface GetUserCase {
      *
      * @param userGetRequest um objeto {@link UserGetRequest} contendo o ID do usuário a ser buscado.
      * @return um objeto {@link UserGetResponse} com os detalhes do usuário encontrado.
-     * Retorna null se o usuário não for encontrado.
      */
     UserGetResponse execute(UserGetRequest userGetRequest);
 }
