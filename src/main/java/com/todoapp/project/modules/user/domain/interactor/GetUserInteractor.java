@@ -1,8 +1,9 @@
 package com.todoapp.project.modules.user.domain.interactor;
 
-import com.todoapp.project.infrastructure.persistence.mappers.UserGetMapper;
+import com.todoapp.project.infrastructure.persistence.user.mappers.UserGetMapper;
 import com.todoapp.project.modules.user.aplication.dto.get.UserGetRequest;
 import com.todoapp.project.modules.user.aplication.dto.get.UserGetResponse;
+import com.todoapp.project.modules.user.aplication.exception.UserNotFoundByIdException;
 import com.todoapp.project.modules.user.domain.UserEntity;
 import com.todoapp.project.modules.user.domain.cases.GetUserCase;
 import com.todoapp.project.modules.user.domain.port.UserRepository;
@@ -43,7 +44,7 @@ public class GetUserInteractor implements GetUserCase {
      */
     @Override
     public UserGetResponse execute(UserGetRequest userGetRequest) {
-        UserEntity user = userRepository.findById(userGetRequest.id());
+        UserEntity user = userRepository.findById(userGetRequest.id()).orElseThrow(() -> new UserNotFoundByIdException("User not found by id"));;
         return userGetMapper.toResponse(user);
     }
 }

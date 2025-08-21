@@ -1,4 +1,4 @@
-package com.todoapp.project.infrastructure.persistence.repositorys;
+package com.todoapp.project.infrastructure.persistence.user.repositorys;
 
 import com.todoapp.project.modules.user.domain.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

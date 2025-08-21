@@ -7,6 +7,7 @@ import com.todoapp.project.modules.user.domain.port.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -31,7 +32,7 @@ class DeleteUserInteractorTest {
 
         UserEntity executer = mock(UserEntity.class);
         when(executer.canDeleteUser()).thenReturn(true);
-        when(userRepository.findById(executerId)).thenReturn(executer);
+        when(userRepository.findById(executerId)).thenReturn(Optional.of(executer));
 
         UserDeleteRequest request = new UserDeleteRequest(targetId);
 
@@ -50,7 +51,7 @@ class DeleteUserInteractorTest {
 
         UserEntity executer = mock(UserEntity.class);
         when(executer.canDeleteUser()).thenReturn(false);
-        when(userRepository.findById(executerId)).thenReturn(executer);
+        when(userRepository.findById(executerId)).thenReturn(Optional.of(executer));
 
         UserDeleteRequest request = new UserDeleteRequest(targetId);
 
