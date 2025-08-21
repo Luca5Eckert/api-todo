@@ -1,6 +1,8 @@
 package com.todoapp.project.modules.user.domain.exceptions.create;
 
-public class UserCreateValidationException extends RuntimeException {
+import com.todoapp.project.modules.user.domain.exceptions.UserValidationException;
+
+public class UserCreateValidationException extends UserValidationException {
   public UserCreateValidationException(String message) {
     super(message);
   }

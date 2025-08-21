@@ -1,6 +1,6 @@
 package com.todoapp.project.modules.user.domain.valueobjects;
 
-import com.todoapp.project.modules.user.domain.exceptions.UserNameBlankException;
+import com.todoapp.project.modules.user.domain.exceptions.name.UserNameBlankException;
 
 public class Name {
 
