@@ -55,8 +55,8 @@ public class EditUserInteractor implements EditUserCase {
      */
     @Override
     public UserEditResponse execute(UserEditRequest editRequest, UUID idExecuter, UUID idUser) {
-        UserEntity userExecuter = userRepository.findById(idExecuter).orElseThrow(() -> new UserNotFoundByIdException("User not found by id"));;
-        UserEntity userEdit = userRepository.findById(idUser).orElseThrow(() -> new UserNotFoundByIdException("User not found by id"));;
+        UserEntity userExecuter = userRepository.findById(idExecuter).orElseThrow(() -> new UserNotFoundByIdException("User not found by id: " + idExecuter));;
+        UserEntity userEdit = userRepository.findById(idUser).orElseThrow(() -> new UserNotFoundByIdException("User not found by id: " + idUser));
 
         validPermission(userEdit, userExecuter);
 
