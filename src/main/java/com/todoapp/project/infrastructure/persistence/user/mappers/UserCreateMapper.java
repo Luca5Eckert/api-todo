@@ -1,4 +1,4 @@
-package com.todoapp.project.infrastructure.persistence.mappers;
+package com.todoapp.project.infrastructure.persistence.user.mappers;
 
 import com.todoapp.project.modules.user.aplication.dto.create.UserCreateRequest;
 import com.todoapp.project.modules.user.aplication.dto.create.UserCreateResponse;

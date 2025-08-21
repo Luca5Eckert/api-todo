@@ -1,7 +1,7 @@
 package com.todoapp.project.infrastructure.persistence.repository;
 
-import com.todoapp.project.infrastructure.persistence.repositorys.JpaUserRepository;
-import com.todoapp.project.infrastructure.persistence.repositorys.JpaUserRepositoryAdapter;
+import com.todoapp.project.infrastructure.persistence.user.repositorys.JpaUserRepository;
+import com.todoapp.project.infrastructure.persistence.user.repositorys.JpaUserRepositoryAdapter;
 import com.todoapp.project.modules.user.aplication.exception.UserNotFoundByIdException;
 import com.todoapp.project.modules.user.domain.UserEntity;
 import org.junit.jupiter.api.BeforeEach;

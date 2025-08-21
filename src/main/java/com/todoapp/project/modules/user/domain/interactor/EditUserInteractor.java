@@ -1,5 +1,6 @@
 package com.todoapp.project.modules.user.domain.interactor;
 
+import com.todoapp.project.infrastructure.persistence.user.mappers.UserEditMapper;
 import com.todoapp.project.modules.user.aplication.dto.edit.UserEditRequest;
 import com.todoapp.project.modules.user.aplication.dto.edit.UserEditResponse;
 import com.todoapp.project.modules.user.domain.UserEntity;
@@ -14,9 +15,11 @@ import java.util.UUID;
 public class EditUserInteractor implements EditUserCase {
 
     private final UserRepository userRepository;
+    private final UserEditMapper userEditMapper;
 
-    public EditUserInteractor(UserRepository userRepository) {
+    public EditUserInteractor(UserRepository userRepository, UserEditMapper userEditMapper) {
         this.userRepository = userRepository;
+        this.userEditMapper = userEditMapper;
     }
 
     @Override
@@ -26,16 +29,11 @@ public class EditUserInteractor implements EditUserCase {
 
         validPermission(userEdit, userExecuter);
 
-        editUser(userEdit, editRequest);
+        userEditMapper.toEntity(editRequest, userEdit);
 
         userRepository.save(userEdit);
 
-        return null;
-    }
-
-    private void editUser(UserEntity userEdit, UserEditRequest editRequest) {
-        userEdit.setEmail(new Email(editRequest.email()));
-        userEdit.setName(new Name(editRequest.name()));
+        return userEditMapper.toResponse(userEdit);
     }
 
     private void validPermission(UserEntity userEdit, UserEntity userExecuter){

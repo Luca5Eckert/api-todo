@@ -1,6 +1,6 @@
 package com.todoapp.project.modules.user.domain.interactor;
 
-import com.todoapp.project.infrastructure.persistence.mappers.UserGetMapper;
+import com.todoapp.project.infrastructure.persistence.user.mappers.UserGetMapper;
 import com.todoapp.project.modules.user.aplication.dto.get.UserGetRequest;
 import com.todoapp.project.modules.user.aplication.dto.get.UserGetResponse;
 import com.todoapp.project.modules.user.domain.UserEntity;
