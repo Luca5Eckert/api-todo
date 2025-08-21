@@ -69,6 +69,13 @@ public class UserEntity {
         this.updateAt = LocalDateTime.now();
     }
 
+    public UserEntity(UUID userId) {
+        this.id = userId;
+        this.createAt = null;
+    }
+
+
+
     public boolean canCreateUser() {
         return switch (type){
             case ADMIN -> true;

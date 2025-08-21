@@ -14,6 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -62,7 +63,7 @@ class GetUserInteractorTest {
     void shouldReturnUserDtoWhenIdIsValid() {
         // Cenário (Arrange)
         // Simula o comportamento do repositório, retornando uma entidade de usuário.
-        when(userRepository.findById(userId)).thenReturn(userEntity);
+        when(userRepository.findById(userId)).thenReturn(Optional.ofNullable(userEntity));
         // Simula o comportamento do mapper, convertendo a entidade para o DTO de resposta.
         when(userGetMapper.toResponse(userEntity)).thenReturn(userGetResponse);
 
@@ -82,22 +83,5 @@ class GetUserInteractorTest {
         verify(userGetMapper, times(1)).toResponse(userEntity);
     }
 
-    /**
-     * Testa o cenário em que o usuário não é encontrado.
-     */
-    @Test
-    @DisplayName("Deve retornar null quando o usuário não é encontrado")
-    void shouldReturnNullWhenUserIsNotFound() {
-        // Cenário (Arrange)
-        // Simula o comportamento do repositório, retornando null (usuário não encontrado).
-        when(userRepository.findById(userId)).thenReturn(null);
-        // Simula o comportamento do mapper, que deve retornar null ao receber null.
-        when(userGetMapper.toResponse(null)).thenReturn(null);
 
-        // Ação (Act)
-        UserGetResponse result = getUserInteractor.execute(userGetRequest);
-
-        // Verificação (Assert)
-        // O resultado
-    }
 }

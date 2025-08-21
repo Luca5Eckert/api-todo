@@ -11,7 +11,11 @@ import java.util.UUID;
 @Component
 public class JpaUserRepositoryAdapter implements UserRepository {
 
-    private JpaUserRepository jpaUserRepository;
+    private final JpaUserRepository jpaUserRepository;
+
+    public JpaUserRepositoryAdapter(JpaUserRepository jpaUserRepository) {
+        this.jpaUserRepository = jpaUserRepository;
+    }
 
     @Override
     public Optional<UserEntity> findById(UUID id) {
