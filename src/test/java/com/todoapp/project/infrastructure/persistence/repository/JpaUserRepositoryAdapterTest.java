@@ -1,5 +1,7 @@
-package com.todoapp.project.infrastructure.persistence.user.repositorys;
+package com.todoapp.project.infrastructure.persistence.repository;
 
+import com.todoapp.project.infrastructure.persistence.user.repositorys.JpaUserRepository;
+import com.todoapp.project.infrastructure.persistence.user.repositorys.JpaUserRepositoryAdapter;
 import com.todoapp.project.modules.user.domain.UserEntity;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

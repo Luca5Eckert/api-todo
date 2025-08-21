@@ -1,5 +1,6 @@
-package com.todoapp.project.infrastructure.persistence.user.mappers;
+package com.todoapp.project.infrastructure.persistence.user.mappers.edit;
 
+import com.todoapp.project.infrastructure.persistence.user.mappers.UserEditMapper;
 import com.todoapp.project.modules.user.aplication.dto.edit.UserEditRequest;
 import com.todoapp.project.modules.user.aplication.dto.edit.UserEditResponse;
 import com.todoapp.project.modules.user.domain.UserEntity;
