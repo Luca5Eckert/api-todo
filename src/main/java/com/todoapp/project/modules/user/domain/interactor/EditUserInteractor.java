@@ -80,12 +80,8 @@ public class EditUserInteractor implements EditUserCase {
      * @throws UserEditValidationException lança exceção quando usuário não tiver permissão
      */
     private void validPermission(UserEntity userEdit, UserEntity userExecuter){
-        if(userEdit.equals(userExecuter)){
-            return;
-        }
-
-        if(!userExecuter.canEditUser()){
-            throw new UserEditValidationException("User can't edit the another user");
+        if(!userExecuter.equals(userEdit) && !userExecuter.canEditUser()){
+            throw new UserEditValidationException("User is not authorized to edit this profile.");
         }
     }
 }
