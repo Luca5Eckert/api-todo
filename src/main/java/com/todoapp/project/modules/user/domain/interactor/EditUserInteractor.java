@@ -38,8 +38,12 @@ public class EditUserInteractor implements EditUserCase {
     }
 
     private void validPermission(UserEntity userEdit, UserEntity userExecuter){
-        if(!userExecuter.canEditUser() || !userExecuter.equals(userEdit)){
-            throw new UserEditValidationException("\"User can't edit the another user\"");
+        if(userEdit.equals(userExecuter)){
+            return;
+        }
+
+        if(!userExecuter.canEditUser()){
+            throw new UserEditValidationException("User can't edit the another user");
         }
     }
 }
