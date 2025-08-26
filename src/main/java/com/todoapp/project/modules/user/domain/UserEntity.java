@@ -1,6 +1,7 @@
 package com.todoapp.project.modules.user.domain;
 
 import com.todoapp.project.infrastructure.persistence.user.converter.EmailConverter;
+import com.todoapp.project.infrastructure.persistence.user.converter.NameConverter;
 import com.todoapp.project.modules.user.domain.enums.TypeUser;
 import com.todoapp.project.modules.user.domain.valueobjects.Email;
 import com.todoapp.project.modules.user.domain.valueobjects.Name;
@@ -19,6 +20,7 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private final UUID id;
 
+    @Convert(converter = NameConverter.class)
     private Name name;
 
     @Convert(converter = EmailConverter.class)
