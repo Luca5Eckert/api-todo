@@ -79,7 +79,7 @@ public class UserController {
      *
      * @param userEditRequest Classe que contém as informações que serão alteradas
      * @param id id do usuário que será alterado
-     * @return ResponseEntity<ApiResponseDto<UserCreateResponse>> resposta da api que contém o usuário editado
+     * @return ResponseEntity<ApiResponseDto<UserEditResponse>> resposta da api que contém o usuário editado
      *
      */
     @PutMapping("/{id}")
@@ -91,6 +91,17 @@ public class UserController {
         return ResponseEntity.ok(ApiResponseDto.sucess(200, "User edited with sucess", userEditResponse));
     }
 
+    /**
+     * Método responsável por deletar um usuário
+     *
+     * <p>Esse método primeiro pega o id do usuário que está executando
+     * a requisição, depois delega a ação para o {@link UserService}.
+     * Caso de tudo certo ele devolve a requisição</p>
+     *
+     * @param id id do usuário que será deletado
+     * @return ResponseEntity<ApiResponseDto<Void>> resposta da api que contém a mensagem de sucesso
+     *
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponseDto<Void>> deleteUser(@PathVariable UUID id){
         UUID idExecuter = userAuthenticationService.getIdUserAuthentication();
@@ -101,6 +112,16 @@ public class UserController {
         return ResponseEntity.ok(ApiResponseDto.sucess(200, "User deleted with sucess"));
     }
 
+    /**
+     * Método responsável por buscar um usuário pelo ID.
+     *
+     * <p>Cria um objeto {@link UserGetRequest} com o ID fornecido
+     * e delega a busca ao {@link UserService}.Retorna uma resposta da API
+     * contendo os dados do usuário encontrado, se a busca for bem-sucedida.</p>
+     *
+     * @param id O ID do usuário a ser buscado.
+     * @return ResponseEntity<ApiResponseDto<UserGetResponse>> A resposta da API com os dados do usuário.
+     */
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponseDto<UserGetResponse>> getUser(@PathVariable UUID id){
 
