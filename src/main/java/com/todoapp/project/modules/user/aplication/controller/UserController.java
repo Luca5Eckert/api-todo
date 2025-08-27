@@ -19,6 +19,17 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
+
+/**
+ * Classe responsável por gerenciar as requisições de rotas
+ *
+ *
+ * <p>Essa classe é responsável por receber a requisições e delegar
+ * a execuções desse códigos para a interface {@link UserService}.
+ * Ela é responsável por devolver a requisição caso ocorra tudo
+ * corretamente</p>
+ *
+ */
 @RestController
 @RequestMapping("/apitodo/user")
 public class UserController {
@@ -26,12 +37,30 @@ public class UserController {
     private final UserService userService;
     private final UserAuthenticationService userAuthenticationService;
 
+    /**
+     * inicializa a classe UserController
+     *
+     * @param userService interface responsável por realizar ações com o usuários
+     * @param userAuthenticationService interface responsável por buscar informações do usuário autenticado
+     *
+     */
     public UserController(UserService userService, UserAuthenticationService userAuthenticationService) {
         this.userService = userService;
         this.userAuthenticationService = userAuthenticationService;
         ;
     }
 
+    /**
+     * Método responsável por criar um usuário
+     *
+     * <p>Esse método primeiro pega o id do usuário que está executando
+     * a requisição, depois delega a ação para o {@link UserService}.
+     * Caso de tudo certo ele devolve a requisição</p>
+     *
+     * @param userCreateRequest Classe que contém informações do usuário que irá ser criado
+     * @return ResponseEntity<ApiResponseDto<UserCreateResponse>> resposta da api que contém o usuário criado
+     *
+     */
     @PostMapping
     public ResponseEntity<ApiResponseDto<UserCreateResponse>> createUser(@RequestBody @Valid UserCreateRequest userCreateRequest){
         UUID id = userAuthenticationService.getIdUserAuthentication();
@@ -41,6 +70,18 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponseDto.sucess(HttpStatus.CREATED.value(), "User created with success", userCreateResponse));
     }
 
+    /**
+     * Método responsável por editar um usuário
+     *
+     * <p>Esse método primeiro pega o id do usuário que está executando
+     * a requisição, depois delega a ação para o {@link UserService}.
+     * Caso de tudo certo ele devolve a requisição</p>
+     *
+     * @param userEditRequest Classe que contém as informações que serão alteradas
+     * @param id id do usuário que será alterado
+     * @return ResponseEntity<ApiResponseDto<UserCreateResponse>> resposta da api que contém o usuário editado
+     *
+     */
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponseDto<UserEditResponse>>  editUser(@RequestBody @Valid UserEditRequest userEditRequest, @PathVariable UUID id){
         UUID idExecuter = userAuthenticationService.getIdUserAuthentication();
