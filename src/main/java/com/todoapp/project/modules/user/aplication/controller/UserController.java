@@ -1,5 +1,6 @@
 package com.todoapp.project.modules.user.aplication.controller;
 
+import com.todoapp.project.core.abstraction.UserAuthenticationService;
 import com.todoapp.project.infrastructure.api.dto.ApiResponseDto;
 import com.todoapp.project.modules.user.aplication.dto.create.UserCreateRequest;
 import com.todoapp.project.modules.user.aplication.dto.create.UserCreateResponse;
@@ -23,16 +24,18 @@ import java.util.UUID;
 public class UserController {
 
     private final UserService userService;
+    private final UserAuthenticationService userAuthenticationService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;;
+    public UserController(UserService userService, UserAuthenticationService userAuthenticationService) {
+        this.userService = userService;
+        this.userAuthenticationService = userAuthenticationService;
+        ;
     }
 
     @PostMapping
     public ResponseEntity<ApiResponseDto<UserCreateResponse>> createUser(@RequestBody @Valid UserCreateRequest userCreateRequest){
-        //Gera um id generico para fins de testes
+        UUID id = userAuthenticationService.getIdUserAuthentication();
 
-        UUID id = UUID.randomUUID();
         UserCreateResponse userCreateResponse = userService.createUser(userCreateRequest, id);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponseDto.sucess(HttpStatus.CREATED.value(), "User created with success", userCreateResponse));
@@ -40,9 +43,8 @@ public class UserController {
 
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponseDto<UserEditResponse>>  editUser(@RequestBody @Valid UserEditRequest userEditRequest, @PathVariable UUID id){
-        //Gera um id generico para fins de testes
+        UUID idExecuter = userAuthenticationService.getIdUserAuthentication();
 
-        UUID idExecuter = UUID.randomUUID();
         UserEditResponse userEditResponse = userService.editResponse(userEditRequest, idExecuter, id);
 
         return ResponseEntity.ok(ApiResponseDto.sucess(200, "User edited with sucess", userEditResponse));
@@ -50,8 +52,7 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponseDto<Void>> deleteUser(@PathVariable UUID id){
-        //Gera um id generico para fins de testes
-        UUID idExecuter = UUID.randomUUID();
+        UUID idExecuter = userAuthenticationService.getIdUserAuthentication();
 
         UserDeleteRequest userDeleteRequest = new UserDeleteRequest(id);
         userService.deleteUser(userDeleteRequest, id);
