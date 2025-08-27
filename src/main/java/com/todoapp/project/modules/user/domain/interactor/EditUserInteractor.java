@@ -9,6 +9,7 @@ import com.todoapp.project.modules.user.domain.cases.EditUserCase;
 import com.todoapp.project.modules.user.domain.exceptions.edit.UserEditValidationException;
 import com.todoapp.project.modules.user.domain.port.UserRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
@@ -24,6 +25,7 @@ import java.util.UUID;
  * e devolve o {@link UserEditResponse} com o {@link UserEditMapper}</p>
  *
  */
+@Component
 public class EditUserInteractor implements EditUserCase {
 
     private final UserRepository userRepository;

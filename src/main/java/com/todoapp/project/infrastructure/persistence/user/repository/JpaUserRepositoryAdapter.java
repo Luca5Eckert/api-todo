@@ -1,6 +1,5 @@
-package com.todoapp.project.infrastructure.persistence.user.repositorys;
+package com.todoapp.project.infrastructure.persistence.user.repository;
 
-import com.todoapp.project.modules.user.aplication.exception.UserNotFoundByIdException;
 import com.todoapp.project.modules.user.domain.UserEntity;
 import com.todoapp.project.modules.user.domain.port.UserRepository;
 import org.springframework.stereotype.Component;

@@ -7,6 +7,7 @@ import com.todoapp.project.modules.user.aplication.exception.UserNotFoundByIdExc
 import com.todoapp.project.modules.user.domain.UserEntity;
 import com.todoapp.project.modules.user.domain.cases.GetUserCase;
 import com.todoapp.project.modules.user.domain.port.UserRepository;
+import org.springframework.stereotype.Component;
 
 
 /**
@@ -16,6 +17,7 @@ import com.todoapp.project.modules.user.domain.port.UserRepository;
  * retorna com os principais dados na classe UserGetResponse usando o {@link UserGetMapper}</p>
  *
  */
+@Component
 public class GetUserInteractor implements GetUserCase {
 
     private final UserRepository userRepository;
