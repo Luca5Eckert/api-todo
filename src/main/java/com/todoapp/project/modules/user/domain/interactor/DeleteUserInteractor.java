@@ -6,6 +6,7 @@ import com.todoapp.project.modules.user.domain.UserEntity;
 import com.todoapp.project.modules.user.domain.cases.DeleteUserCase;
 import com.todoapp.project.modules.user.domain.exceptions.delete.UserDeleteValidationException;
 import com.todoapp.project.modules.user.domain.port.UserRepository;
+import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
@@ -16,6 +17,7 @@ import java.util.UUID;
  * tem permissão para deletar outro usuário antes de deletar
  * o usuário usando o {@link UserRepository}.</p>
  */
+@Component
 public class DeleteUserInteractor implements DeleteUserCase {
 
     public final UserRepository userRepository;

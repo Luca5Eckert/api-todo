@@ -12,6 +12,7 @@ import com.todoapp.project.modules.user.domain.cases.CreateUserCase;
 import com.todoapp.project.modules.user.domain.cases.DeleteUserCase;
 import com.todoapp.project.modules.user.domain.cases.EditUserCase;
 import com.todoapp.project.modules.user.domain.cases.GetUserCase;
+import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
@@ -24,6 +25,7 @@ import java.util.UUID;
  * o {@link DeleteUserCase} e ela edita utilizando o {@link EditUserCase}</p>
  *
  */
+@Service
 public class UserSeviceImpl implements UserService {
 
     private final CreateUserCase createUserCase;

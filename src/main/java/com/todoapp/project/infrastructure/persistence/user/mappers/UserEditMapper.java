@@ -5,6 +5,7 @@ import com.todoapp.project.modules.user.aplication.dto.edit.UserEditResponse;
 import com.todoapp.project.modules.user.domain.UserEntity;
 import com.todoapp.project.modules.user.domain.valueobjects.Email;
 import com.todoapp.project.modules.user.domain.valueobjects.Name;
+import org.springframework.stereotype.Component;
 
 /**
  * Classe responsável por mapear dados entre objetos de requisição,
@@ -14,6 +15,7 @@ import com.todoapp.project.modules.user.domain.valueobjects.Name;
  * separação de responsabilidades e evitar o acoplamento direto entre as camadas
  * da aplicação.</p>
  */
+@Component
 public class UserEditMapper {
 
     /**
