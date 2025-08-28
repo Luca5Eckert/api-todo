@@ -1,0 +1,49 @@
+package com.todoapp.project.infrastructure.security.user;
+
+import com.todoapp.project.modules.user.domain.enums.TypeUser;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.UUID;
+
+public class UserDetailsAdapter implements UserDetails {
+
+    private final UUID id;
+    private final String name;
+    private final String email;
+    private final String password;
+    private final TypeUser typeUser;
+
+    public UserDetailsAdapter(UUID id, String name, String email, String password, TypeUser typeUser) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.typeUser = typeUser;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(typeUser);
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return name;
+    }
+
+    public String getEmail(){
+        return email;
+    }
+
+    public UUID getId(){
+        return id;
+    }
+}
