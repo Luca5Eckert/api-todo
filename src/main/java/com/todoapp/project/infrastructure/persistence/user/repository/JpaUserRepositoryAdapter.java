@@ -2,6 +2,7 @@ package com.todoapp.project.infrastructure.persistence.user.repository;
 
 import com.todoapp.project.modules.user.domain.UserEntity;
 import com.todoapp.project.modules.user.domain.port.UserRepository;
+import com.todoapp.project.modules.user.domain.valueobjects.Email;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -29,5 +30,10 @@ public class JpaUserRepositoryAdapter implements UserRepository {
     @Override
     public void deleteById(UUID id) {
         jpaUserRepository.deleteById(id);
+    }
+
+    @Override
+    public void findByEmail(Email email) {
+        return jpaUserRepository.findByEmail(email);
     }
 }
