@@ -33,7 +33,7 @@ public class JpaUserRepositoryAdapter implements UserRepository {
     }
 
     @Override
-    public void findByEmail(Email email) {
+    public Optional<UserEntity> findByEmail(Email email) {
         return jpaUserRepository.findByEmail(email);
     }
 }
