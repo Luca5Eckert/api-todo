@@ -1,7 +1,9 @@
 package com.todoapp.project.infrastructure.security.user;
 
 import com.todoapp.project.modules.user.domain.UserEntity;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UserDetailsMapper {
 
     public UserDetailsAdapter toDetails(UserEntity userEntity){

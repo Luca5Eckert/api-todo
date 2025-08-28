@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class UserDetailsServiceAdapter implements UserDetailsService {
 
@@ -22,8 +24,8 @@ public class UserDetailsServiceAdapter implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        UserEntity userEntity = userRepository.findByEmail(new Email(email)).orElseThrow(() -> new UserNotFoundByEmailException("User not found by email"));
+    public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
+        UserEntity userEntity = userRepository.findById(UUID.fromString(id)).orElseThrow(() -> new UserNotFoundByEmailException("User not found by email"));
         return userDetailsMapper.toDetails(userEntity);
     }
 }
