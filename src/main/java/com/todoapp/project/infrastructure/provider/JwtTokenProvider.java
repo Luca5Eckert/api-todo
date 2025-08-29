@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -16,9 +17,12 @@ public class JwtTokenProvider {
     private final Key key;
     private final long validityInMilliseconds;
 
-    // O construtor agora recebe a chave secreta e o tempo de validade
-    public JwtTokenProvider(String secret, long validityInMilliseconds) {
-        this.key = Keys.secretKeyFor(SignatureAlgorithm.HS256); // Chave gerada a partir da string secreta
+    public JwtTokenProvider(
+            @Value("${jwt.secret}") String secret,
+            @Value("${jwt.token.validity}") long validityInMilliseconds
+    ) {
+        // Correctly use the provided secret string to create a consistent key
+        this.key = Keys.hmacShaKeyFor(secret.getBytes());
         this.validityInMilliseconds = validityInMilliseconds;
     }
 
