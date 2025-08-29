@@ -1,4 +1,6 @@
 package com.todoapp.project.modules.auth.aplication.dto.login;
 
-public record UserLoginResponse(String token) {
+import java.util.UUID;
+
+public record UserLoginResponse(UUID id, String username, String email, String token) {
 }
