@@ -13,7 +13,9 @@ import com.todoapp.project.modules.user.domain.valueobjects.Email;
 import com.todoapp.project.modules.user.domain.valueobjects.Name;
 import com.todoapp.project.modules.user.domain.valueobjects.Password;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
+@Component
 public class RegisterUserInteractor implements RegisterUserCase {
 
     private final UserRepository userRepository;
@@ -30,6 +32,7 @@ public class RegisterUserInteractor implements RegisterUserCase {
 
     @Override
     public UserRegisterResponse execute(UserRegisterRequest userRegisterRequest) {
+
         Name name = new Name(userRegisterRequest.name());
         Email email = new Email(userRegisterRequest.email());
         Password password = Password.fromPlain(userRegisterRequest.password(), passwordEncoder, passwordValidator);
@@ -41,6 +44,8 @@ public class RegisterUserInteractor implements RegisterUserCase {
         userRepository.save(userEntity);
 
         return registerUserMapper.toResponse(userEntity);
+
     }
+
 
 }

@@ -10,11 +10,9 @@ import com.todoapp.project.modules.user.aplication.dto.edit.UserEditResponse;
 import com.todoapp.project.modules.user.aplication.dto.get.UserGetRequest;
 import com.todoapp.project.modules.user.aplication.dto.get.UserGetResponse;
 import com.todoapp.project.modules.user.aplication.port.UserService;
-import com.todoapp.project.modules.user.domain.cases.CreateUserCase;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -67,7 +65,7 @@ public class UserController {
 
         UserCreateResponse userCreateResponse = userService.createUser(userCreateRequest, id);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponseDto.sucess(HttpStatus.CREATED.value(), "User created with success", userCreateResponse));
+        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponseDto.success(HttpStatus.CREATED.value(), "User created with success", userCreateResponse));
     }
 
     /**
@@ -88,7 +86,7 @@ public class UserController {
 
         UserEditResponse userEditResponse = userService.editResponse(userEditRequest, idExecuter, id);
 
-        return ResponseEntity.ok(ApiResponseDto.sucess(200, "User edited with sucess", userEditResponse));
+        return ResponseEntity.ok(ApiResponseDto.success(200, "User edited with sucess", userEditResponse));
     }
 
     /**
@@ -109,7 +107,7 @@ public class UserController {
         UserDeleteRequest userDeleteRequest = new UserDeleteRequest(id);
         userService.deleteUser(userDeleteRequest, id);
 
-        return ResponseEntity.ok(ApiResponseDto.sucess(200, "User deleted with sucess"));
+        return ResponseEntity.ok(ApiResponseDto.success(200, "User deleted with sucess"));
     }
 
     /**
@@ -128,7 +126,7 @@ public class UserController {
         UserGetRequest userGetRequest = new UserGetRequest(id);
         UserGetResponse userGetResponse = userService.getUser(userGetRequest);
 
-        return ResponseEntity.ok(ApiResponseDto.sucess(200, "User found with sucess", userGetResponse));
+        return ResponseEntity.ok(ApiResponseDto.success(200, "User found with sucess", userGetResponse));
     }
 
 

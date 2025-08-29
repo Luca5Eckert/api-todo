@@ -1,4 +1,4 @@
-package com.todoapp.project.modules.auth.aplication.dto.port;
+package com.todoapp.project.modules.auth.aplication.port;
 
 import com.todoapp.project.modules.auth.aplication.dto.login.UserLoginRequest;
 import com.todoapp.project.modules.auth.aplication.dto.login.UserLoginResponse;
