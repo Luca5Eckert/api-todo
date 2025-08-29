@@ -8,8 +8,10 @@ import com.todoapp.project.modules.user.domain.UserEntity;
 import com.todoapp.project.modules.user.domain.enums.TypeUser;
 import com.todoapp.project.modules.user.domain.exceptions.edit.UserEditValidationException;
 import com.todoapp.project.modules.user.domain.port.UserRepository;
+import com.todoapp.project.modules.user.domain.validator.PasswordValidator;
 import com.todoapp.project.modules.user.domain.valueobjects.Email;
 import com.todoapp.project.modules.user.domain.valueobjects.Name;
+import com.todoapp.project.modules.user.domain.valueobjects.Password;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,6 +19,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -36,6 +39,12 @@ class EditUserInteractorTest {
     @Mock
     private UserEditMapper userEditMapper;
 
+    @Mock
+    private PasswordEncoder passwordEncoder;
+
+    @Mock
+    private PasswordValidator passwordValidator;
+
     private UUID executerId;
     private UUID userId;
     private UserEditRequest editRequest;
@@ -54,7 +63,7 @@ class EditUserInteractorTest {
                 executerId,
                 new Name("Admin Executer"),
                 new Email("admin@example.com"),
-                "password",
+                Password.fromPlain("password", passwordEncoder, passwordValidator),
                 TypeUser.ADMIN,
                 null, null, 0
         ));
@@ -63,7 +72,7 @@ class EditUserInteractorTest {
                 userId,
                 new Name("Old Name"),
                 new Email("old.email@example.com"),
-                "old_password",
+                Password.fromPlain("password", passwordEncoder, passwordValidator),
                 TypeUser.NORMAL,
                 null, null, 0
         ));
@@ -136,7 +145,7 @@ class EditUserInteractorTest {
                 UUID.randomUUID(),
                 new Name("Normal User"),
                 new Email("normal@example.com"),
-                "password",
+                Password.fromPlain("password", passwordEncoder, passwordValidator),
                 TypeUser.NORMAL,
                 null, null, 0
         );

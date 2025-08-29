@@ -6,6 +6,7 @@ import com.todoapp.project.modules.user.domain.UserEntity;
 import com.todoapp.project.modules.user.domain.enums.TypeUser;
 import com.todoapp.project.modules.user.domain.valueobjects.Email;
 import com.todoapp.project.modules.user.domain.valueobjects.Name;
+import com.todoapp.project.modules.user.domain.valueobjects.Password;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,7 +26,7 @@ class UserGetMapperTest {
 
     @Test
     public void shouldReturnAUserGetResponse(){
-        UserEntity userEntity = new UserEntity(UUID.randomUUID(), new Name("Lucas"), new Email("Lucas@gmail.com"), "lucas lucas", TypeUser.NORMAL, LocalDateTime.now(), LocalDateTime.now(), 1);
+        UserEntity userEntity = new UserEntity(UUID.randomUUID(), new Name("Lucas"), new Email("Lucas@gmail.com"), Password.fromHash("lucas lucas"), TypeUser.NORMAL, LocalDateTime.now(), LocalDateTime.now(), 1);
         UserGetResponse userGetResponse = new UserGetResponse(userEntity.getId(), userEntity.getName().getValue(), userEntity.getEmail().getValue(), userEntity.getType());
 
         UserGetResponse userGetResponseTest = userGetMapper.toResponse(userEntity);

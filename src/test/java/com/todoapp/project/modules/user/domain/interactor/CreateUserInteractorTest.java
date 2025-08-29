@@ -5,18 +5,10 @@ import com.todoapp.project.modules.user.aplication.dto.create.UserCreateRequest;
 import com.todoapp.project.modules.user.aplication.dto.create.UserCreateResponse;
 import com.todoapp.project.modules.user.aplication.exception.UserNotFoundByIdException;
 import com.todoapp.project.modules.user.domain.UserEntity;
-import com.todoapp.project.modules.user.domain.enums.TypeUser;
 import com.todoapp.project.modules.user.domain.exceptions.create.UserCreateValidationException;
 import com.todoapp.project.modules.user.domain.port.UserRepository;
-import com.todoapp.project.modules.user.domain.valueobjects.Email;
-import com.todoapp.project.modules.user.domain.valueobjects.Name;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -24,97 +16,58 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class)
 class CreateUserInteractorTest {
 
-    @InjectMocks
-    private CreateUserInteractor createUseInteractor;
-
-    @Mock
     private UserRepository userRepository;
-
-    @Mock
     private UserCreateMapper userCreateMapper;
-
-    private UUID authorizedUserId;
-    private UserCreateRequest userCreateRequest;
-    private UserEntity authorizedUser;
-    private UserEntity newUser;
-    private UserCreateResponse userCreateResponse;
+    private CreateUserInteractor createUserInteractor;
 
     @BeforeEach
     void setUp() {
-        authorizedUserId = UUID.randomUUID();
-
-        authorizedUser = new UserEntity(
-                authorizedUserId,
-                new Name("Admin User"),
-                new Email("admin@example.com"),
-                "password123",
-                TypeUser.ADMIN,
-                null, null, 0
-        );
-
-        userCreateRequest = new UserCreateRequest("New User", "newuser@example.com", "securepass");
-
-        newUser = new UserEntity(
-                UUID.randomUUID(),
-                new Name("New User"),
-                new Email("newuser@example.com"),
-                "securepass",
-                TypeUser.NORMAL,
-                null, null, 0
-        );
-
-        userCreateResponse = new UserCreateResponse(newUser.getId(), newUser.getName().getValue(), newUser.getEmail().getValue());
+        userRepository = mock(UserRepository.class);
+        userCreateMapper = mock(UserCreateMapper.class);
+        createUserInteractor = new CreateUserInteractor(userRepository, userCreateMapper);
     }
 
     @Test
-    @DisplayName("Should create a user successfully when the user has permission")
-    void shouldCreateUserSuccessfullyWhenAuthorized() {
-        when(userRepository.findById(authorizedUserId)).thenReturn(Optional.of(authorizedUser));
-        when(userCreateMapper.toEntity(userCreateRequest)).thenReturn(newUser);
-        when(userCreateMapper.toResponse(newUser)).thenReturn(userCreateResponse);
+    void shouldThrowExceptionWhenUserNotFound() {
+        UUID id = UUID.randomUUID();
+        when(userRepository.findById(id)).thenReturn(Optional.empty());
 
-        UserCreateResponse response = createUseInteractor.execute(userCreateRequest, authorizedUserId);
-
-        verify(userRepository).findById(authorizedUserId);
-        verify(userRepository).save(newUser);
-        verify(userCreateMapper).toEntity(userCreateRequest);
-        verify(userCreateMapper).toResponse(newUser);
-        assertNotNull(response);
-        assertEquals(userCreateResponse, response);
+        assertThrows(UserNotFoundByIdException.class, () ->
+                createUserInteractor.execute(new UserCreateRequest("Test", "test@example.com", "4343eq"), id));
     }
 
     @Test
-    @DisplayName("Should throw an exception when the user lacks permission to create another")
-    void shouldThrowExceptionWhenUserLacksPermission() {
-        UserEntity unauthorizedUser = new UserEntity(
-                UUID.randomUUID(),
-                new Name("Normal User"),
-                new Email("normal@example.com"),
-                "password",
-                TypeUser.NORMAL,
-                null, null, 0
-        );
-        when(userRepository.findById(any(UUID.class))).thenReturn(Optional.of(unauthorizedUser));
+    void shouldThrowExceptionWhenUserHasNoPermission() {
+        UUID id = UUID.randomUUID();
+        UserEntity user = mock(UserEntity.class);
+        when(userRepository.findById(id)).thenReturn(Optional.of(user));
+        when(user.canCreateUser()).thenReturn(false);
 
-        assertThrows(UserCreateValidationException.class, () -> {
-            createUseInteractor.execute(userCreateRequest, unauthorizedUser.getId());
-        });
-
-        verify(userRepository, never()).save(any(UserEntity.class));
+        assertThrows(UserCreateValidationException.class, () ->
+                createUserInteractor.execute(new UserCreateRequest("Test", "test@example.com", "4343eq"), id));
     }
 
     @Test
-    @DisplayName("Should throw an exception when the authorized user is not found")
-    void shouldThrowExceptionWhenAuthorizedUserNotFound() {
-        when(userRepository.findById(any(UUID.class))).thenReturn(Optional.empty());
+    void shouldCreateUserWhenUserHasPermission() {
+        UUID id = UUID.randomUUID();
+        UserEntity user = mock(UserEntity.class);
+        when(userRepository.findById(id)).thenReturn(Optional.of(user));
+        when(user.canCreateUser()).thenReturn(true);
 
-        assertThrows(UserNotFoundByIdException.class, () -> {
-            createUseInteractor.execute(userCreateRequest, authorizedUserId);
-        });
+        UserCreateRequest request = new UserCreateRequest("Test", "test@example.com", "3242");
+        UserEntity createdEntity = mock(UserEntity.class);
+        UserCreateResponse response = new UserCreateResponse(UUID.randomUUID(), "Test", "test@example.com");
 
-        verify(userRepository, never()).save(any(UserEntity.class));
+        when(userCreateMapper.toEntity(request)).thenReturn(createdEntity);
+        when(userCreateMapper.toResponse(createdEntity)).thenReturn(response);
+
+        UserCreateResponse result = createUserInteractor.execute(request, id);
+
+        assertEquals(response, result);
+
+        // Verifica se o save foi chamado
+        verify(userRepository).save(createdEntity);
     }
 }

@@ -4,6 +4,7 @@ package com.todoapp.project.modules.user.domain;
 import com.todoapp.project.modules.user.domain.enums.TypeUser;
 import com.todoapp.project.modules.user.domain.valueobjects.Email;
 import com.todoapp.project.modules.user.domain.valueobjects.Name;
+import com.todoapp.project.modules.user.domain.valueobjects.Password;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +27,7 @@ class UserEntityTest {
         UUID id = UUID.randomUUID();
         Name name = new Name("John Doe");
         Email email = new Email("john.doe@example.com");
-        String password = "securePassword123";
+        Password password = Password.fromHash("securePassword123");
         TypeUser type = TypeUser.ADMIN;
         LocalDateTime createAt = LocalDateTime.now();
         LocalDateTime updateAt = LocalDateTime.now();
@@ -53,7 +54,7 @@ class UserEntityTest {
         // Given
         Name name = new Name("Jane Smith");
         Email email = new Email("jane.smith@example.com");
-        String password = "anotherSecurePassword";
+        Password password = Password.fromHash("anotherSecurePassword");
         TypeUser type = TypeUser.NORMAL;
 
         // When
@@ -92,7 +93,7 @@ class UserEntityTest {
     @DisplayName("Should allow user creation for an ADMIN")
     void shouldAllowUserCreationForAdmin() {
         // Given
-        UserEntity adminUser = new UserEntity(new Name("Admin"), new Email("admin@test.com"), "pass", TypeUser.ADMIN);
+        UserEntity adminUser = new UserEntity(new Name("Admin"), new Email("admin@test.com"), Password.fromHash("pass"), TypeUser.ADMIN);
 
         // When & Then
         assertTrue(adminUser.canCreateUser(), "An ADMIN user should be able to create other users.");
@@ -102,7 +103,7 @@ class UserEntityTest {
     @DisplayName("Should not allow user creation for a NORMAL user")
     void shouldNotAllowUserCreationForNormal() {
         // Given
-        UserEntity normalUser = new UserEntity(new Name("Normal"), new Email("normal@test.com"), "pass", TypeUser.NORMAL);
+        UserEntity normalUser = new UserEntity(new Name("Normal"), new Email("normal@test.com"), Password.fromHash("pass"), TypeUser.NORMAL);
 
         // When & Then
         assertFalse(normalUser.canCreateUser(), "A NORMAL user should not be able to create other users.");
@@ -112,7 +113,7 @@ class UserEntityTest {
     @DisplayName("Should update the name using the setter")
     void shouldUpdateNameUsingSetter() {
         // Given
-        UserEntity user = new UserEntity(new Name("Old Name"), new Email("user@test.com"), "pass", TypeUser.NORMAL);
+        UserEntity user = new UserEntity(new Name("Old Name"), new Email("user@test.com"), Password.fromHash("pass"), TypeUser.NORMAL);
         Name newName = new Name("New Name");
 
         // When
@@ -126,7 +127,7 @@ class UserEntityTest {
     @DisplayName("Should update the email using the setter")
     void shouldUpdateEmailUsingSetter() {
         // Given
-        UserEntity user = new UserEntity(new Name("User"), new Email("old@test.com"), "pass", TypeUser.NORMAL);
+        UserEntity user = new UserEntity(new Name("User"), new Email("old@test.com"), Password.fromHash("pass"), TypeUser.NORMAL);
         Email newEmail = new Email("new@test.com");
 
         // When
@@ -140,8 +141,8 @@ class UserEntityTest {
     @DisplayName("Should update the password using the setter")
     void shouldUpdatePasswordUsingSetter() {
         // Given
-        UserEntity user = new UserEntity(new Name("User"), new Email("user@test.com"), "oldpass", TypeUser.NORMAL);
-        String newPassword = "newPassword123";
+        UserEntity user = new UserEntity(new Name("User"), new Email("user@test.com"), Password.fromHash("oldpass"), TypeUser.NORMAL);
+        Password newPassword = Password.fromHash("newPassword123");
 
         // When
         user.setPassword(newPassword);
@@ -154,7 +155,7 @@ class UserEntityTest {
     @DisplayName("Should update the user type using the setter")
     void shouldUpdateUserTypeUsingSetter() {
         // Given
-        UserEntity user = new UserEntity(new Name("User"), new Email("user@test.com"), "pass", TypeUser.NORMAL);
+        UserEntity user = new UserEntity(new Name("User"), new Email("user@test.com"), Password.fromHash("pass"), TypeUser.NORMAL);
         TypeUser newType = TypeUser.ADMIN;
 
         // When
