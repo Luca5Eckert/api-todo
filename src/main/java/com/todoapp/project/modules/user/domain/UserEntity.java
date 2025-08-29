@@ -2,9 +2,11 @@ package com.todoapp.project.modules.user.domain;
 
 import com.todoapp.project.infrastructure.persistence.user.converter.EmailConverter;
 import com.todoapp.project.infrastructure.persistence.user.converter.NameConverter;
+import com.todoapp.project.infrastructure.persistence.user.converter.PasswordConverter;
 import com.todoapp.project.modules.user.domain.enums.TypeUser;
 import com.todoapp.project.modules.user.domain.valueobjects.Email;
 import com.todoapp.project.modules.user.domain.valueobjects.Name;
+import com.todoapp.project.modules.user.domain.valueobjects.Password;
 import jakarta.persistence.*;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
@@ -26,7 +28,8 @@ public class UserEntity {
     @Convert(converter = EmailConverter.class)
     private Email email;
 
-    private String password;
+    @Convert(converter =  PasswordConverter.class)
+    private Password password;
 
     private TypeUser type;
 
@@ -51,7 +54,7 @@ public class UserEntity {
         this.version = -1;
     }
 
-    public UserEntity(UUID id, Name name, Email email, String password, TypeUser type, LocalDateTime createAt, LocalDateTime updateAt, long version) {
+    public UserEntity(UUID id, Name name, Email email, Password password, TypeUser type, LocalDateTime createAt, LocalDateTime updateAt, long version) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -63,7 +66,7 @@ public class UserEntity {
     }
 
 
-    public UserEntity(Name name, Email email, String password, TypeUser typeUser) {
+    public UserEntity(Name name, Email email, Password password, TypeUser typeUser) {
         this.id = null;
         this.name = name;
         this.email = email;
@@ -122,11 +125,11 @@ public class UserEntity {
         this.email = email;
     }
 
-    public String getPassword() {
+    public Password getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(Password password) {
         this.password = password;
     }
 
