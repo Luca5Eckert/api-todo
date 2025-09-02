@@ -1,9 +1,11 @@
 package com.todoapp.project.modules.user.domain.validator;
 
 import com.todoapp.project.modules.user.domain.exceptions.password.PasswordValidException;
+import org.springframework.stereotype.Component;
 
 import java.util.regex.Pattern;
 
+@Component
 public class PasswordValidatorImpl implements PasswordValidator {
 
     private static final Pattern SPECIAL_CHAR_PATTERN = Pattern.compile("[^a-zA-Z0-9]");
