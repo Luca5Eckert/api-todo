@@ -36,7 +36,7 @@ class JpaUserRepositoryAdapterTest {
     @DisplayName("Deve retornar um Optional com o usuário quando o ID for encontrado")
     void findById_ShouldReturnOptionalUser_WhenIdExists() {
         // Cenário (Arrange)
-        UUID userId = UUID.randomUUID();
+        long userId = 1323;
         UserEntity user = new UserEntity(userId); // Use uma entidade mock real ou um mock
 
         // Define o comportamento do mock: quando findById for chamado, retorne um Optional com o usuário.
@@ -57,7 +57,7 @@ class JpaUserRepositoryAdapterTest {
     @DisplayName("Deve retornar um Optional vazio quando o ID não for encontrado")
     void findById_ShouldReturnEmptyOptional_WhenIdDoesNotExist() {
         // Cenário (Arrange)
-        UUID userId = UUID.randomUUID();
+        long userId = 424;
 
         // Define o comportamento do mock: quando findById for chamado, retorne um Optional vazio.
         when(jpaUserRepository.findById(userId)).thenReturn(Optional.empty());

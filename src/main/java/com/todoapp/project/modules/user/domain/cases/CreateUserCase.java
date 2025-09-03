@@ -7,5 +7,5 @@ import java.util.UUID;
 
 public interface CreateUserCase {
 
-    UserCreateResponse execute(UserCreateRequest userCreateRequest, UUID uuid);
+    UserCreateResponse execute(UserCreateRequest userCreateRequest, long uuid);
 }

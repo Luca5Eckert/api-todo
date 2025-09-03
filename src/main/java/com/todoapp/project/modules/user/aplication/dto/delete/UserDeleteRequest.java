@@ -4,5 +4,5 @@ import jakarta.validation.constraints.NotBlank;
 
 import java.util.UUID;
 
-public record UserDeleteRequest(@NotBlank UUID id) {
+public record UserDeleteRequest(@NotBlank long id) {
 }

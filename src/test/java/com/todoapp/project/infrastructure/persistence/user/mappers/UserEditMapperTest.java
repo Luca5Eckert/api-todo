@@ -6,6 +6,7 @@ import com.todoapp.project.modules.user.domain.UserEntity;
 import com.todoapp.project.modules.user.domain.enums.TypeUser;
 import com.todoapp.project.modules.user.domain.valueobjects.Email;
 import com.todoapp.project.modules.user.domain.valueobjects.Name;
+import com.todoapp.project.modules.user.domain.valueobjects.Password;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,7 @@ class UserEditMapperTest {
                 UUID.randomUUID(),
                 new Name("Old Name"),
                 new Email("old.email@example.com"),
-                "old_password",
+                Password.fromHash("lucas lucas"),
                 TypeUser.NORMAL,
                 null, null, 0
         );
@@ -55,7 +56,7 @@ class UserEditMapperTest {
                 userId,
                 new Name("Test User"),
                 new Email("test@example.com"),
-                "password",
+                Password.fromHash("lucas lucas"),
                 TypeUser.ADMIN,
                 null, null, 0
         );

@@ -10,11 +10,9 @@ import com.todoapp.project.modules.user.aplication.dto.edit.UserEditResponse;
 import com.todoapp.project.modules.user.aplication.dto.get.UserGetRequest;
 import com.todoapp.project.modules.user.aplication.dto.get.UserGetResponse;
 import com.todoapp.project.modules.user.aplication.port.UserService;
-import com.todoapp.project.modules.user.domain.cases.CreateUserCase;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -31,7 +29,7 @@ import java.util.UUID;
  *
  */
 @RestController
-@RequestMapping("/apitodo/user")
+@RequestMapping("/apitodo/users")
 public class UserController {
 
     private final UserService userService;
@@ -63,11 +61,11 @@ public class UserController {
      */
     @PostMapping
     public ResponseEntity<ApiResponseDto<UserCreateResponse>> createUser(@RequestBody @Valid UserCreateRequest userCreateRequest){
-        UUID id = userAuthenticationService.getIdUserAuthentication();
+        long id = userAuthenticationService.getIdUserAuthentication();
 
         UserCreateResponse userCreateResponse = userService.createUser(userCreateRequest, id);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponseDto.sucess(HttpStatus.CREATED.value(), "User created with success", userCreateResponse));
+        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponseDto.success(HttpStatus.CREATED.value(), "User created with success", userCreateResponse));
     }
 
     /**
@@ -83,12 +81,12 @@ public class UserController {
      *
      */
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponseDto<UserEditResponse>>  editUser(@RequestBody @Valid UserEditRequest userEditRequest, @PathVariable UUID id){
-        UUID idExecuter = userAuthenticationService.getIdUserAuthentication();
+    public ResponseEntity<ApiResponseDto<UserEditResponse>>  editUser(@RequestBody @Valid UserEditRequest userEditRequest, @PathVariable long id){
+        long idExecuter = userAuthenticationService.getIdUserAuthentication();
 
         UserEditResponse userEditResponse = userService.editResponse(userEditRequest, idExecuter, id);
 
-        return ResponseEntity.ok(ApiResponseDto.sucess(200, "User edited with sucess", userEditResponse));
+        return ResponseEntity.ok(ApiResponseDto.success(200, "User edited with sucess", userEditResponse));
     }
 
     /**
@@ -103,13 +101,13 @@ public class UserController {
      *
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponseDto<Void>> deleteUser(@PathVariable UUID id){
-        UUID idExecuter = userAuthenticationService.getIdUserAuthentication();
+    public ResponseEntity<ApiResponseDto<Void>> deleteUser(@PathVariable long id){
+        long idExecuter = userAuthenticationService.getIdUserAuthentication();
 
         UserDeleteRequest userDeleteRequest = new UserDeleteRequest(id);
-        userService.deleteUser(userDeleteRequest, id);
+        userService.deleteUser(userDeleteRequest, idExecuter);
 
-        return ResponseEntity.ok(ApiResponseDto.sucess(200, "User deleted with sucess"));
+        return ResponseEntity.ok(ApiResponseDto.success(200, "User deleted with sucess"));
     }
 
     /**
@@ -123,12 +121,12 @@ public class UserController {
      * @return ResponseEntity<ApiResponseDto<UserGetResponse>> A resposta da API com os dados do usuário.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponseDto<UserGetResponse>> getUser(@PathVariable UUID id){
+    public ResponseEntity<ApiResponseDto<UserGetResponse>> getUser(@PathVariable long id){
 
         UserGetRequest userGetRequest = new UserGetRequest(id);
         UserGetResponse userGetResponse = userService.getUser(userGetRequest);
 
-        return ResponseEntity.ok(ApiResponseDto.sucess(200, "User found with sucess", userGetResponse));
+        return ResponseEntity.ok(ApiResponseDto.success(200, "User found with sucess", userGetResponse));
     }
 
 

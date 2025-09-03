@@ -1,6 +1,7 @@
 package com.todoapp.project.infrastructure.api.service;
 
 import com.todoapp.project.core.abstraction.UserAuthenticationService;
+import com.todoapp.project.infrastructure.security.user.UserDetailsAdapter;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -11,10 +12,10 @@ import java.util.UUID;
 public class UserAuthenticationServiceAdapter implements UserAuthenticationService {
 
     @Override
-    public UUID getIdUserAuthentication() {
-        UserDetails userDetails = getUserDetails();
-        //apenas para fins de teste
-        return UUID.fromString(userDetails.getUsername());
+    public long getIdUserAuthentication() {
+        UserDetailsAdapter userDetails = (UserDetailsAdapter) getUserDetails();
+
+        return userDetails.getId();
     }
 
     @Override

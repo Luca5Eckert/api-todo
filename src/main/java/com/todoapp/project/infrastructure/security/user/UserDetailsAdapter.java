@@ -10,13 +10,13 @@ import java.util.UUID;
 
 public class UserDetailsAdapter implements UserDetails {
 
-    private final UUID id;
+    private final long id;
     private final String name;
     private final String email;
     private final String password;
     private final TypeUser typeUser;
 
-    public UserDetailsAdapter(UUID id, String name, String email, String password, TypeUser typeUser) {
+    public UserDetailsAdapter(long id, String name, String email, String password, TypeUser typeUser) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -43,7 +43,7 @@ public class UserDetailsAdapter implements UserDetails {
         return email;
     }
 
-    public UUID getId(){
+    public long getId(){
         return id;
     }
 }

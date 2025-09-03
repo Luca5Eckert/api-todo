@@ -8,7 +8,9 @@ import com.todoapp.project.modules.user.aplication.exception.UserNotFoundByIdExc
 import com.todoapp.project.modules.user.domain.UserEntity;
 import com.todoapp.project.modules.user.domain.cases.CreateUserCase;
 import com.todoapp.project.modules.user.domain.exceptions.create.UserCreateValidationException;
+import com.todoapp.project.modules.user.domain.exceptions.email.EmailAlreadyUseException;
 import com.todoapp.project.modules.user.domain.port.UserRepository;
+import com.todoapp.project.modules.user.domain.valueobjects.Email;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -25,10 +27,12 @@ public class CreateUserInteractor implements CreateUserCase  {
     }
 
     @Override
-    public UserCreateResponse execute(UserCreateRequest userCreateRequest, UUID id) {
+    public UserCreateResponse execute(UserCreateRequest userCreateRequest, long id) {
         UserEntity user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundByIdException("User not found by id"));;
 
         validUserPermission(user);
+
+        if(userRepository.findByEmail(new Email(userCreateRequest.email())).isPresent()) throw new EmailAlreadyUseException("Email already in use");
 
         UserEntity userToCreate = userCreateMapper.toEntity(userCreateRequest);
 

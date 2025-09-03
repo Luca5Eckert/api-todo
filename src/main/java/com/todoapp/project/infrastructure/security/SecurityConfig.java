@@ -20,25 +20,14 @@ import org.springframework.web.cors.CorsConfigurationSource;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final UserDetailsServiceAdapter userDetailsService;
-    private final JwtAuthenticationFilter authenticationFilter;
-
-    public SecurityConfig(UserDetailsServiceAdapter userDetailsService, JwtAuthenticationFilter authenticationFilter) {
-        this.userDetailsService = userDetailsService;
-        this.authenticationFilter = authenticationFilter;
-    }
-
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, CorsConfigurationSource corsConfigurationSource) throws Exception {
-
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthenticationFilter authenticationFilter) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> {
-
-                    auth.requestMatchers("/apitodo/user/**").authenticated();
-
-                    auth.anyRequest().authenticated();
+                    auth.requestMatchers("/apitodo/users/**").authenticated();
+                    auth.anyRequest().permitAll();
                 })
                 .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

@@ -2,9 +2,11 @@ package com.todoapp.project.modules.user.domain;
 
 import com.todoapp.project.infrastructure.persistence.user.converter.EmailConverter;
 import com.todoapp.project.infrastructure.persistence.user.converter.NameConverter;
+import com.todoapp.project.infrastructure.persistence.user.converter.PasswordConverter;
 import com.todoapp.project.modules.user.domain.enums.TypeUser;
 import com.todoapp.project.modules.user.domain.valueobjects.Email;
 import com.todoapp.project.modules.user.domain.valueobjects.Name;
+import com.todoapp.project.modules.user.domain.valueobjects.Password;
 import jakarta.persistence.*;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
@@ -17,16 +19,18 @@ import java.util.UUID;
 public class UserEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private final UUID id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private final long id;
 
     @Convert(converter = NameConverter.class)
     private Name name;
 
     @Convert(converter = EmailConverter.class)
+    @Column(unique = true)
     private Email email;
 
-    private String password;
+    @Convert(converter =  PasswordConverter.class)
+    private Password password;
 
     private TypeUser type;
 
@@ -41,7 +45,7 @@ public class UserEntity {
 
 
     public UserEntity() {
-        this.id = null;
+        this.id = -1;
         this.name = null;
         this.email = null;
         this.password = null;
@@ -51,7 +55,7 @@ public class UserEntity {
         this.version = -1;
     }
 
-    public UserEntity(UUID id, Name name, Email email, String password, TypeUser type, LocalDateTime createAt, LocalDateTime updateAt, long version) {
+    public UserEntity(long id, Name name, Email email, Password password, TypeUser type, LocalDateTime createAt, LocalDateTime updateAt, long version) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -63,8 +67,8 @@ public class UserEntity {
     }
 
 
-    public UserEntity(Name name, Email email, String password, TypeUser typeUser) {
-        this.id = null;
+    public UserEntity(Name name, Email email, Password password, TypeUser typeUser) {
+        this.id = -1;
         this.name = name;
         this.email = email;
         this.password = password;
@@ -73,7 +77,7 @@ public class UserEntity {
         this.updateAt = LocalDateTime.now();
     }
 
-    public UserEntity(UUID userId) {
+    public UserEntity(long userId) {
         this.id = userId;
         this.createAt = null;
     }
@@ -102,7 +106,7 @@ public class UserEntity {
         };
     }
 
-    public UUID getId() {
+    public long getId() {
         return id;
     }
 
@@ -122,11 +126,11 @@ public class UserEntity {
         this.email = email;
     }
 
-    public String getPassword() {
+    public Password getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(Password password) {
         this.password = password;
     }
 

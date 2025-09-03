@@ -4,5 +4,5 @@ import jakarta.validation.constraints.NotBlank;
 
 import java.util.UUID;
 
-public record UserCreateResponse(@NotBlank UUID id,@NotBlank String name,@NotBlank String email){
+public record UserCreateResponse(@NotBlank long id,@NotBlank String name,@NotBlank String email){
 }
