@@ -13,7 +13,7 @@ public class UserAuthenticationServiceAdapter implements UserAuthenticationServi
     @Override
     public UUID getIdUserAuthentication() {
         UserDetails userDetails = getUserDetails();
-        //apenas para fins de teste
+
         return UUID.fromString(userDetails.getUsername());
     }
 

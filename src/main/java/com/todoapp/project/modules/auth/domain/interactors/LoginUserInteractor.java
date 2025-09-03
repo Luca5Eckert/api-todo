@@ -36,7 +36,7 @@ public class LoginUserInteractor implements LoginUserCase {
 
         UserDetailsAdapter userDetails = (UserDetailsAdapter) authentication.getPrincipal();
 
-        String token = jwtTokenProvider.generateToken(userDetails.getUsername(), userDetails.getId().toString());
+        String token = jwtTokenProvider.generateToken(userDetails.getEmail());
 
         return loginUserMapper.toResponse(userDetails, token);
 

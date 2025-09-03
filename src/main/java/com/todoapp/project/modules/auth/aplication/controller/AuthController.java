@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/apitodo/auth")
+@RequestMapping("/apitodo/auth")
 public class AuthController {
 
     private final AuthService authService;
