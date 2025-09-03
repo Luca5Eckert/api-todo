@@ -6,5 +6,5 @@ import jakarta.validation.constraints.NotNull;
 
 import java.util.UUID;
 
-public record UserGetResponse(@NotNull UUID id, @NotBlank String name, @NotBlank String email, @NotBlank TypeUser type){
+public record UserGetResponse(@NotNull long id, @NotBlank String name, @NotBlank String email, @NotBlank TypeUser type){
 }

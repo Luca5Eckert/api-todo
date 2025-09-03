@@ -31,7 +31,7 @@ class CreateUserInteractorTest {
 
     @Test
     void shouldThrowExceptionWhenUserNotFound() {
-        UUID id = UUID.randomUUID();
+        long id = 24342;
         when(userRepository.findById(id)).thenReturn(Optional.empty());
 
         assertThrows(UserNotFoundByIdException.class, () ->
@@ -40,7 +40,7 @@ class CreateUserInteractorTest {
 
     @Test
     void shouldThrowExceptionWhenUserHasNoPermission() {
-        UUID id = UUID.randomUUID();
+        long id = 24342;
         UserEntity user = mock(UserEntity.class);
         when(userRepository.findById(id)).thenReturn(Optional.of(user));
         when(user.canCreateUser()).thenReturn(false);
@@ -51,7 +51,7 @@ class CreateUserInteractorTest {
 
     @Test
     void shouldCreateUserWhenUserHasPermission() {
-        UUID id = UUID.randomUUID();
+        long id = 24342;
         UserEntity user = mock(UserEntity.class);
         when(userRepository.findById(id)).thenReturn(Optional.of(user));
         when(user.canCreateUser()).thenReturn(true);

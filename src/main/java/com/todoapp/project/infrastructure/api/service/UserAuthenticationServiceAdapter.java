@@ -12,7 +12,7 @@ import java.util.UUID;
 public class UserAuthenticationServiceAdapter implements UserAuthenticationService {
 
     @Override
-    public UUID getIdUserAuthentication() {
+    public long getIdUserAuthentication() {
         UserDetailsAdapter userDetails = (UserDetailsAdapter) getUserDetails();
 
         return userDetails.getId();

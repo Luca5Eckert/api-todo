@@ -12,11 +12,11 @@ import java.util.UUID;
 
 public interface UserService {
 
-    UserCreateResponse createUser(UserCreateRequest userCreateRequest, UUID id);
+    UserCreateResponse createUser(UserCreateRequest userCreateRequest, long id);
 
     UserGetResponse getUser(UserGetRequest userGetRequest);
 
-    void deleteUser(UserDeleteRequest deleteRequest, UUID idUser);
+    void deleteUser(UserDeleteRequest deleteRequest, long idUser);
 
-    UserEditResponse editResponse(UserEditRequest userEditRequest, UUID idExecuter, UUID idUser);
+    UserEditResponse editResponse(UserEditRequest userEditRequest, long idExecuter, long idUser);
 }

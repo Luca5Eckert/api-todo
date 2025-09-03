@@ -22,5 +22,5 @@ public interface EditUserCase {
      * @param idUser id do usuário que será editado
      * @return UserEditResponse retorna uma objeto com as informações do usuário alteradas
      */
-    UserEditResponse execute(UserEditRequest editRequest, UUID idExecuter, UUID idUser);
+    UserEditResponse execute(UserEditRequest editRequest, long idExecuter, long idUser);
 }

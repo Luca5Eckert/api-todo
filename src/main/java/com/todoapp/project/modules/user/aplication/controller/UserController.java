@@ -29,7 +29,7 @@ import java.util.UUID;
  *
  */
 @RestController
-@RequestMapping("/apitodo/user")
+@RequestMapping("/apitodo/users")
 public class UserController {
 
     private final UserService userService;
@@ -61,7 +61,7 @@ public class UserController {
      */
     @PostMapping
     public ResponseEntity<ApiResponseDto<UserCreateResponse>> createUser(@RequestBody @Valid UserCreateRequest userCreateRequest){
-        UUID id = userAuthenticationService.getIdUserAuthentication();
+        long id = userAuthenticationService.getIdUserAuthentication();
 
         UserCreateResponse userCreateResponse = userService.createUser(userCreateRequest, id);
 
@@ -81,8 +81,8 @@ public class UserController {
      *
      */
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponseDto<UserEditResponse>>  editUser(@RequestBody @Valid UserEditRequest userEditRequest, @PathVariable UUID id){
-        UUID idExecuter = userAuthenticationService.getIdUserAuthentication();
+    public ResponseEntity<ApiResponseDto<UserEditResponse>>  editUser(@RequestBody @Valid UserEditRequest userEditRequest, @PathVariable long id){
+        long idExecuter = userAuthenticationService.getIdUserAuthentication();
 
         UserEditResponse userEditResponse = userService.editResponse(userEditRequest, idExecuter, id);
 
@@ -101,11 +101,11 @@ public class UserController {
      *
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponseDto<Void>> deleteUser(@PathVariable UUID id){
-        UUID idExecuter = userAuthenticationService.getIdUserAuthentication();
+    public ResponseEntity<ApiResponseDto<Void>> deleteUser(@PathVariable long id){
+        long idExecuter = userAuthenticationService.getIdUserAuthentication();
 
         UserDeleteRequest userDeleteRequest = new UserDeleteRequest(id);
-        userService.deleteUser(userDeleteRequest, id);
+        userService.deleteUser(userDeleteRequest, idExecuter);
 
         return ResponseEntity.ok(ApiResponseDto.success(200, "User deleted with sucess"));
     }
@@ -121,7 +121,7 @@ public class UserController {
      * @return ResponseEntity<ApiResponseDto<UserGetResponse>> A resposta da API com os dados do usuário.
      */
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponseDto<UserGetResponse>> getUser(@PathVariable UUID id){
+    public ResponseEntity<ApiResponseDto<UserGetResponse>> getUser(@PathVariable long id){
 
         UserGetRequest userGetRequest = new UserGetRequest(id);
         UserGetResponse userGetResponse = userService.getUser(userGetRequest);

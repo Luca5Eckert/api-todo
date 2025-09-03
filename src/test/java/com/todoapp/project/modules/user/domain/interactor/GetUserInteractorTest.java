@@ -38,7 +38,7 @@ class GetUserInteractorTest {
     @InjectMocks
     private GetUserInteractor getUserInteractor;
 
-    private UUID userId;
+    private long userId;
     private UserGetRequest userGetRequest;
     private UserEntity userEntity;
     private UserGetResponse userGetResponse;
@@ -49,7 +49,7 @@ class GetUserInteractorTest {
      */
     @BeforeEach
     void setUp() {
-        userId = UUID.randomUUID();
+        userId = 21313;
         userGetRequest = new UserGetRequest(userId);
         userEntity = new UserEntity(userId, null, null, null, null, null, null, 0); // Simplificação, para o teste o importante é que seja um UserEntity.
         userGetResponse = new UserGetResponse(userId, "test@example.com", "Test User", TypeUser.NORMAL); // DTO de resposta esperado.

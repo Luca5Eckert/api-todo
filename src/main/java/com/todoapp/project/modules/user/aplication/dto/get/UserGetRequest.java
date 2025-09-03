@@ -4,5 +4,5 @@ import jakarta.validation.constraints.NotNull;
 
 import java.util.UUID;
 
-public record UserGetRequest(@NotNull UUID id) {
+public record UserGetRequest(@NotNull long id) {
 }

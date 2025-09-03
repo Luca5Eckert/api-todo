@@ -31,7 +31,7 @@ public class UserCreateMapper {
     }
 
     public UserCreateResponse toResponse(UserEntity userEntity){
-        return new UserCreateResponse(userEntity.getId(), userEntity.getName().getValue(), userEntity.getName().getValue());
+        return new UserCreateResponse(userEntity.getId(), userEntity.getName().getValue(), userEntity.getEmail().getValue());
     }
 
 }

@@ -27,8 +27,8 @@ class DeleteUserInteractorTest {
     @Test
     void shouldDeleteUserWhenExecutorHasPermission() {
         // Arrange
-        UUID executerId = UUID.randomUUID();
-        UUID targetId = UUID.randomUUID();
+        long executerId = 24342;
+        long targetId = 24342;
 
         UserEntity executer = mock(UserEntity.class);
         when(executer.canDeleteUser()).thenReturn(true);
@@ -46,8 +46,8 @@ class DeleteUserInteractorTest {
     @Test
     void shouldThrowExceptionWhenExecutorDoesNotHavePermission() {
         // Arrange
-        UUID executerId = UUID.randomUUID();
-        UUID targetId = UUID.randomUUID();
+        long executerId = 24342;
+        long targetId = 24342;
 
         UserEntity executer = mock(UserEntity.class);
         when(executer.canDeleteUser()).thenReturn(false);

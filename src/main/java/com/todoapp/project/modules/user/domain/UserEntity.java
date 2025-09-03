@@ -19,13 +19,14 @@ import java.util.UUID;
 public class UserEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private final UUID id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private final long id;
 
     @Convert(converter = NameConverter.class)
     private Name name;
 
     @Convert(converter = EmailConverter.class)
+    @Column(unique = true)
     private Email email;
 
     @Convert(converter =  PasswordConverter.class)
@@ -44,7 +45,7 @@ public class UserEntity {
 
 
     public UserEntity() {
-        this.id = null;
+        this.id = -1;
         this.name = null;
         this.email = null;
         this.password = null;
@@ -54,7 +55,7 @@ public class UserEntity {
         this.version = -1;
     }
 
-    public UserEntity(UUID id, Name name, Email email, Password password, TypeUser type, LocalDateTime createAt, LocalDateTime updateAt, long version) {
+    public UserEntity(long id, Name name, Email email, Password password, TypeUser type, LocalDateTime createAt, LocalDateTime updateAt, long version) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -67,7 +68,7 @@ public class UserEntity {
 
 
     public UserEntity(Name name, Email email, Password password, TypeUser typeUser) {
-        this.id = null;
+        this.id = -1;
         this.name = name;
         this.email = email;
         this.password = password;
@@ -76,7 +77,7 @@ public class UserEntity {
         this.updateAt = LocalDateTime.now();
     }
 
-    public UserEntity(UUID userId) {
+    public UserEntity(long userId) {
         this.id = userId;
         this.createAt = null;
     }
@@ -105,7 +106,7 @@ public class UserEntity {
         };
     }
 
-    public UUID getId() {
+    public long getId() {
         return id;
     }
 

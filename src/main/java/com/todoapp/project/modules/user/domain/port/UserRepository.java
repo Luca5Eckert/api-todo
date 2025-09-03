@@ -8,11 +8,11 @@ import java.util.UUID;
 
 public interface UserRepository {
 
-    Optional<UserEntity> findById(UUID id);
+    Optional<UserEntity> findById(long id);
 
     void save(UserEntity userEntity);
 
-    void deleteById(UUID id);
+    void deleteById(long id);
 
     Optional<UserEntity> findByEmail(Email email);
 

@@ -16,9 +16,9 @@ public interface UserAuthenticationService {
     /**
      * Método para buscar o id do usuário autenticado
      *
-     * @return UUID id do usuário autenticado
+     * @return long id do usuário autenticado
      */
-    UUID getIdUserAuthentication();
+    long getIdUserAuthentication();
 
 
     /**

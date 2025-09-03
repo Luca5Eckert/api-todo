@@ -6,5 +6,5 @@ import java.util.UUID;
 
 public interface DeleteUserCase {
 
-    void execute(UserDeleteRequest userDeleteRequest, UUID id);
+    void execute(UserDeleteRequest userDeleteRequest, long id);
 }

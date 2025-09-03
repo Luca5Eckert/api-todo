@@ -44,7 +44,7 @@ public class DeleteUserInteractor implements DeleteUserCase {
      *
      */
     @Override
-    public void execute(UserDeleteRequest userDeleteRequest, UUID id) {
+    public void execute(UserDeleteRequest userDeleteRequest, long id) {
         UserEntity userExecuter = userRepository.findById(id).orElseThrow(() -> new UserNotFoundByIdException("User not found by id"));;
 
         validUserPermissions(userExecuter);

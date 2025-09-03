@@ -18,7 +18,7 @@ public class JpaUserRepositoryAdapter implements UserRepository {
     }
 
     @Override
-    public Optional<UserEntity> findById(UUID id) {
+    public Optional<UserEntity> findById(long id) {
         return jpaUserRepository.findById(id);
     }
 
@@ -28,7 +28,7 @@ public class JpaUserRepositoryAdapter implements UserRepository {
     }
 
     @Override
-    public void deleteById(UUID id) {
+    public void deleteById(long id) {
         jpaUserRepository.deleteById(id);
     }
 

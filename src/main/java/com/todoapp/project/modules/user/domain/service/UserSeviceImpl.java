@@ -61,7 +61,7 @@ public class UserSeviceImpl implements UserService {
      *
      */
     @Override
-    public UserCreateResponse createUser(UserCreateRequest userCreateRequest, UUID id) {
+    public UserCreateResponse createUser(UserCreateRequest userCreateRequest, long id) {
         return createUserCase.execute(userCreateRequest, id);
     }
 
@@ -91,7 +91,7 @@ public class UserSeviceImpl implements UserService {
      * @param id id do usuário que vai deletar o outro usuário
      */
     @Override
-    public void deleteUser(UserDeleteRequest deleteRequest, UUID id){
+    public void deleteUser(UserDeleteRequest deleteRequest, long id){
         deleteUserCase.execute(deleteRequest, id);
     }
 
@@ -110,7 +110,7 @@ public class UserSeviceImpl implements UserService {
      * alteradas
      */
     @Override
-    public UserEditResponse editResponse(UserEditRequest userEditRequest, UUID idUser, UUID idExecuter){
+    public UserEditResponse editResponse(UserEditRequest userEditRequest, long idUser, long idExecuter){
         return editUserCase.execute(userEditRequest, idExecuter, idUser);
     }
 
