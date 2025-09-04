@@ -3,7 +3,7 @@ package com.todoapp.project.infrastructure.persistence.user.mappers;
 import com.todoapp.project.modules.user.aplication.dto.edit.UserEditRequest;
 import com.todoapp.project.modules.user.aplication.dto.edit.UserEditResponse;
 import com.todoapp.project.modules.user.domain.UserEntity;
-import com.todoapp.project.modules.user.domain.enums.TypeUser;
+import com.todoapp.project.modules.user.domain.enumerator.TypeUser;
 import com.todoapp.project.modules.user.domain.valueobjects.Email;
 import com.todoapp.project.modules.user.domain.valueobjects.Name;
 import com.todoapp.project.modules.user.domain.valueobjects.Password;

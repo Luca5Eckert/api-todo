@@ -1,13 +1,11 @@
 package com.todoapp.project.infrastructure.persistence.user.mappers;
 
-import com.todoapp.project.modules.user.aplication.dto.get.UserGetRequest;
 import com.todoapp.project.modules.user.aplication.dto.get.UserGetResponse;
 import com.todoapp.project.modules.user.domain.UserEntity;
-import com.todoapp.project.modules.user.domain.enums.TypeUser;
+import com.todoapp.project.modules.user.domain.enumerator.TypeUser;
 import com.todoapp.project.modules.user.domain.valueobjects.Email;
 import com.todoapp.project.modules.user.domain.valueobjects.Name;
 import com.todoapp.project.modules.user.domain.valueobjects.Password;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

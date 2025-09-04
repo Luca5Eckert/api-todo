@@ -1,12 +1,11 @@
 package com.todoapp.project.infrastructure.security.user;
 
-import com.todoapp.project.modules.user.domain.enums.TypeUser;
+import com.todoapp.project.modules.user.domain.enumerator.TypeUser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.UUID;
 
 public class UserDetailsAdapter implements UserDetails {
 
