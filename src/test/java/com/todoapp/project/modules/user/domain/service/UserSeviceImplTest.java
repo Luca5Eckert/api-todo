@@ -1,22 +1,12 @@
 package com.todoapp.project.modules.user.domain.service;
 
-import com.todoapp.project.modules.user.aplication.dto.create.UserCreateRequest;
-import com.todoapp.project.modules.user.aplication.dto.create.UserCreateResponse;
-import com.todoapp.project.modules.user.domain.UserEntity;
-import com.todoapp.project.modules.user.domain.cases.CreateUserCase;
-import com.todoapp.project.modules.user.domain.enums.TypeUser;
 import com.todoapp.project.modules.user.domain.interactor.CreateUserInteractor;
 import com.todoapp.project.modules.user.domain.port.UserRepository;
-import com.todoapp.project.modules.user.domain.valueobjects.Email;
-import com.todoapp.project.modules.user.domain.valueobjects.Name;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.time.LocalDateTime;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

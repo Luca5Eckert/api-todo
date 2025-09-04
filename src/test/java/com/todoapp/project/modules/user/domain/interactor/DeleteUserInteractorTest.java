@@ -59,6 +59,6 @@ class DeleteUserInteractorTest {
         assertThrows(UserDeleteValidationException.class,
                 () -> deleteUserInteractor.execute(request, executerId));
 
-        verify(userRepository, never()).deleteById(any());
+        verify(userRepository, never()).deleteById(any(Long.class));
     }
 }

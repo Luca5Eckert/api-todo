@@ -1,7 +1,7 @@
 package com.todoapp.project.modules.user.domain;
 
 
-import com.todoapp.project.modules.user.domain.enums.TypeUser;
+import com.todoapp.project.modules.user.domain.enumerator.TypeUser;
 import com.todoapp.project.modules.user.domain.valueobjects.Email;
 import com.todoapp.project.modules.user.domain.valueobjects.Name;
 import com.todoapp.project.modules.user.domain.valueobjects.Password;
@@ -24,7 +24,7 @@ class UserEntityTest {
     @DisplayName("Should construct UserEntity with the full constructor and verify all fields")
     void shouldConstructUserEntityWithFullConstructorAndVerifyFields() {
         // Given - Data to create the object
-        UUID id = UUID.randomUUID();
+        long id = 234234;
         Name name = new Name("John Doe");
         Email email = new Email("john.doe@example.com");
         Password password = Password.fromHash("securePassword123");
@@ -62,7 +62,7 @@ class UserEntityTest {
 
         // Then
         assertNotNull(user);
-        assertNull(user.getId());
+        assertEquals(user.getId(), -1);
         assertEquals(name, user.getName());
         assertEquals(email, user.getEmail());
         assertEquals(password, user.getPassword());
@@ -79,7 +79,7 @@ class UserEntityTest {
 
         // Then
         assertNotNull(user);
-        assertNull(user.getId());
+        assertEquals(user.getId(), -1);
         assertNull(user.getName());
         assertNull(user.getEmail());
         assertNull(user.getPassword());

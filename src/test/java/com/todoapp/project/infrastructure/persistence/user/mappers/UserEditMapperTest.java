@@ -3,7 +3,7 @@ package com.todoapp.project.infrastructure.persistence.user.mappers;
 import com.todoapp.project.modules.user.aplication.dto.edit.UserEditRequest;
 import com.todoapp.project.modules.user.aplication.dto.edit.UserEditResponse;
 import com.todoapp.project.modules.user.domain.UserEntity;
-import com.todoapp.project.modules.user.domain.enums.TypeUser;
+import com.todoapp.project.modules.user.domain.enumerator.TypeUser;
 import com.todoapp.project.modules.user.domain.valueobjects.Email;
 import com.todoapp.project.modules.user.domain.valueobjects.Name;
 import com.todoapp.project.modules.user.domain.valueobjects.Password;
@@ -31,7 +31,7 @@ class UserEditMapperTest {
         // Cenário (Arrange)
         UserEditRequest request = new UserEditRequest("New Name", "new.email@example.com");
         UserEntity userToUpdate = new UserEntity(
-                UUID.randomUUID(),
+                64564,
                 new Name("Old Name"),
                 new Email("old.email@example.com"),
                 Password.fromHash("lucas lucas"),
@@ -51,7 +51,7 @@ class UserEditMapperTest {
     @DisplayName("Should map UserEntity to UserEditResponse")
     void toResponse_shouldMapUserEntityToResponseCorrectly() {
         // Cenário (Arrange)
-        UUID userId = UUID.randomUUID();
+        long userId = 4645;
         UserEntity userEntity = new UserEntity(
                 userId,
                 new Name("Test User"),

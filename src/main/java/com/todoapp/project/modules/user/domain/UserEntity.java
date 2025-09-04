@@ -3,7 +3,7 @@ package com.todoapp.project.modules.user.domain;
 import com.todoapp.project.infrastructure.persistence.user.converter.EmailConverter;
 import com.todoapp.project.infrastructure.persistence.user.converter.NameConverter;
 import com.todoapp.project.infrastructure.persistence.user.converter.PasswordConverter;
-import com.todoapp.project.modules.user.domain.enums.TypeUser;
+import com.todoapp.project.modules.user.domain.enumerator.TypeUser;
 import com.todoapp.project.modules.user.domain.valueobjects.Email;
 import com.todoapp.project.modules.user.domain.valueobjects.Name;
 import com.todoapp.project.modules.user.domain.valueobjects.Password;
@@ -13,7 +13,6 @@ import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
-import java.util.UUID;
 
 @Entity
 public class UserEntity {

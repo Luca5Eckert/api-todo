@@ -1,32 +1,5 @@
 package com.todoapp.project.modules.user.domain.interactor;
 
-import com.todoapp.project.infrastructure.persistence.user.mappers.UserEditMapper;
-import com.todoapp.project.modules.user.aplication.dto.edit.UserEditRequest;
-import com.todoapp.project.modules.user.aplication.dto.edit.UserEditResponse;
-import com.todoapp.project.modules.user.aplication.exception.UserNotFoundByIdException;
-import com.todoapp.project.modules.user.domain.UserEntity;
-import com.todoapp.project.modules.user.domain.enums.TypeUser;
-import com.todoapp.project.modules.user.domain.exceptions.edit.UserEditValidationException;
-import com.todoapp.project.modules.user.domain.port.UserRepository;
-import com.todoapp.project.modules.user.domain.validator.PasswordValidator;
-import com.todoapp.project.modules.user.domain.valueobjects.Email;
-import com.todoapp.project.modules.user.domain.valueobjects.Name;
-import com.todoapp.project.modules.user.domain.valueobjects.Password;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.util.Optional;
-import java.util.UUID;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
 
 /*
 @ExtendWith(MockitoExtension.class)

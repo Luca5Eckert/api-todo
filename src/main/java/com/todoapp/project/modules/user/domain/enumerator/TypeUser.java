@@ -1,4 +1,4 @@
-package com.todoapp.project.modules.user.domain.enums;
+package com.todoapp.project.modules.user.domain.enumerator;
 
 import org.springframework.security.core.GrantedAuthority;
 

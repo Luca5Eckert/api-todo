@@ -58,7 +58,7 @@ class CreateUserInteractorTest {
 
         UserCreateRequest request = new UserCreateRequest("Test", "test@example.com", "3242");
         UserEntity createdEntity = mock(UserEntity.class);
-        UserCreateResponse response = new UserCreateResponse(UUID.randomUUID(), "Test", "test@example.com");
+        UserCreateResponse response = new UserCreateResponse(4654, "Test", "test@example.com");
 
         when(userCreateMapper.toEntity(request)).thenReturn(createdEntity);
         when(userCreateMapper.toResponse(createdEntity)).thenReturn(response);
