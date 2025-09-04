@@ -62,7 +62,7 @@ class UserCreateMapperTest {
     @DisplayName("Should successfully map UserEntity to UserCreateResponse")
     void shouldMapUserEntityToUserCreateResponseSuccessfully() {
         // Given
-        UUID id = UUID.randomUUID();
+        long id = 3424;
         String nameValue = "Test Response";
         String emailValue = "response@email.com";
         UserEntity userEntity = new UserEntity(id, new Name(nameValue), new Email(emailValue), Password.fromHash("password"), TypeUser.NORMAL, null, null, 0);
@@ -74,7 +74,7 @@ class UserCreateMapperTest {
         assertNotNull(response);
         assertEquals(id, response.id());
         assertEquals(nameValue, response.name());
-        assertEquals(nameValue, response.email());
+        assertEquals(emailValue, response.email());
         // The mapper is incorrect, as it's returning the name value for the email field. This test reflects the current behavior.
         // The 'email' field is missing from the response, but the test confirms the current mapper logic.
         // It's important to note that the real mapper should be updated to use userEntity.getEmail().getValue().

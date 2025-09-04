@@ -31,7 +31,7 @@ class UserEditMapperTest {
         // Cenário (Arrange)
         UserEditRequest request = new UserEditRequest("New Name", "new.email@example.com");
         UserEntity userToUpdate = new UserEntity(
-                UUID.randomUUID(),
+                64564,
                 new Name("Old Name"),
                 new Email("old.email@example.com"),
                 Password.fromHash("lucas lucas"),
@@ -51,7 +51,7 @@ class UserEditMapperTest {
     @DisplayName("Should map UserEntity to UserEditResponse")
     void toResponse_shouldMapUserEntityToResponseCorrectly() {
         // Cenário (Arrange)
-        UUID userId = UUID.randomUUID();
+        long userId = 4645;
         UserEntity userEntity = new UserEntity(
                 userId,
                 new Name("Test User"),

@@ -24,7 +24,7 @@ class UserGetMapperTest {
 
     @Test
     public void shouldReturnAUserGetResponse(){
-        UserEntity userEntity = new UserEntity(UUID.randomUUID(), new Name("Lucas"), new Email("Lucas@gmail.com"), Password.fromHash("lucas lucas"), TypeUser.NORMAL, LocalDateTime.now(), LocalDateTime.now(), 1);
+        UserEntity userEntity = new UserEntity(53534, new Name("Lucas"), new Email("Lucas@gmail.com"), Password.fromHash("lucas lucas"), TypeUser.NORMAL, LocalDateTime.now(), LocalDateTime.now(), 1);
         UserGetResponse userGetResponse = new UserGetResponse(userEntity.getId(), userEntity.getName().getValue(), userEntity.getEmail().getValue(), userEntity.getType());
 
         UserGetResponse userGetResponseTest = userGetMapper.toResponse(userEntity);
