@@ -2,9 +2,12 @@ package com.todoapp.project.modules.furniture.domain;
 
 import com.todoapp.project.infrastructure.persistence.user.converter.NameConverter;
 import com.todoapp.project.modules.furniture.domain.enumerator.TypeFurniture;
+import com.todoapp.project.modules.furniture.domain.exception.description.FurnitureBlankDescriptionException;
 import com.todoapp.project.modules.furniture.domain.exception.description.FurnitureDescriptionException;
+import com.todoapp.project.modules.furniture.domain.exception.description.FurnitureLengthDescriptionException;
 import com.todoapp.project.modules.furniture.domain.exception.estimedate.FurnitureEstimeDateException;
 import com.todoapp.project.modules.furniture.domain.exception.startdate.FurnitureStartDateException;
+import com.todoapp.project.modules.furniture.domain.exception.type.FurnitureTypeException;
 import com.todoapp.project.modules.user.domain.valueobjects.Name;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -65,8 +68,12 @@ public class FurnitureEntity {
 
     public void setDescription(String description) {
         if(description.isBlank()){
-            throw new FurnitureDescriptionException("Description can't be null");
+            throw new FurnitureBlankDescriptionException("Description can't be Blank");
         }
+        if(description.length() > 400){
+            throw new FurnitureLengthDescriptionException("Description can be max 400 words");
+        }
+
         this.description = description;
     }
 
@@ -75,6 +82,9 @@ public class FurnitureEntity {
     }
 
     public void setType(TypeFurniture type) {
+        if(type == null){
+            throw new FurnitureTypeException("Type can't be null");
+        }
         this.type = type;
     }
 
