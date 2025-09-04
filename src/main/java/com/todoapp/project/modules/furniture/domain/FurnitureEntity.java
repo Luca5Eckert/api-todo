@@ -6,6 +6,7 @@ import com.todoapp.project.modules.furniture.domain.exception.description.Furnit
 import com.todoapp.project.modules.furniture.domain.exception.description.FurnitureDescriptionException;
 import com.todoapp.project.modules.furniture.domain.exception.description.FurnitureLengthDescriptionException;
 import com.todoapp.project.modules.furniture.domain.exception.estimedate.FurnitureEstimeDateException;
+import com.todoapp.project.modules.furniture.domain.exception.name.FurnitureNameException;
 import com.todoapp.project.modules.furniture.domain.exception.startdate.FurnitureStartDateException;
 import com.todoapp.project.modules.furniture.domain.exception.type.FurnitureTypeException;
 import com.todoapp.project.modules.user.domain.valueobjects.Name;
@@ -59,6 +60,9 @@ public class FurnitureEntity {
     }
 
     public void setName(Name name) {
+        if(name == null){
+            throw new FurnitureNameException("The name can't not be null");
+        }
         this.name = name;
     }
 
@@ -97,6 +101,9 @@ public class FurnitureEntity {
     }
 
     public void setDateStartToCreate(LocalDateTime dateStartToCreate) {
+        if(dateStartToCreate == null){
+            throw new FurnitureEstimeDateException("The start date can't be null");
+        }
         if(dateStartToCreate.isBefore(this.estimeDateToFinish)){
             throw new FurnitureStartDateException("The start date can't be before then estime date");
         }
@@ -108,6 +115,9 @@ public class FurnitureEntity {
     }
 
     public void setEstimeDateToFinish(LocalDateTime estimeDateToFinish) {
+        if(estimeDateToFinish == null){
+            throw new FurnitureEstimeDateException("The estime date can't be null");
+        }
         if(estimeDateToFinish.isAfter(this.dateStartToCreate)){
             throw new FurnitureEstimeDateException("The estime date can't be after then start date");
         }
