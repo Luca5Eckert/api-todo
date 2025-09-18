@@ -90,7 +90,7 @@ class JpaUserRepositoryAdapterTest {
     @DisplayName("Deve chamar o método deleteById do JpaRepository quando deleteById for invocado")
     void deleteById_ShouldCallJpaRepositoryDeleteById() {
         // Cenário (Arrange)
-        UUID userId = UUID.randomUUID();
+        long userId = 3424;
 
         // Ação (Act)
         jpaUserRepositoryAdapter.deleteById(userId);

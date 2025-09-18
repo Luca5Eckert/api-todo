@@ -3,7 +3,7 @@ package com.todoapp.project.infrastructure.persistence.user.mappers;
 import com.todoapp.project.modules.user.aplication.dto.create.UserCreateRequest;
 import com.todoapp.project.modules.user.aplication.dto.create.UserCreateResponse;
 import com.todoapp.project.modules.user.domain.UserEntity;
-import com.todoapp.project.modules.user.domain.enums.TypeUser;
+import com.todoapp.project.modules.user.domain.enumerator.TypeUser;
 import com.todoapp.project.modules.user.domain.validator.PasswordValidator;
 import com.todoapp.project.modules.user.domain.valueobjects.Email;
 import com.todoapp.project.modules.user.domain.valueobjects.Name;

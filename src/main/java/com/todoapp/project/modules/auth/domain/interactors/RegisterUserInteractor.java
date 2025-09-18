@@ -5,7 +5,7 @@ import com.todoapp.project.modules.auth.aplication.dto.register.UserRegisterRequ
 import com.todoapp.project.modules.auth.aplication.dto.register.UserRegisterResponse;
 import com.todoapp.project.modules.auth.domain.cases.RegisterUserCase;
 import com.todoapp.project.modules.user.domain.UserEntity;
-import com.todoapp.project.modules.user.domain.enums.TypeUser;
+import com.todoapp.project.modules.user.domain.enumerator.TypeUser;
 import com.todoapp.project.modules.user.domain.exceptions.email.EmailAlreadyUseException;
 import com.todoapp.project.modules.user.domain.port.UserRepository;
 import com.todoapp.project.modules.user.domain.validator.PasswordValidator;
