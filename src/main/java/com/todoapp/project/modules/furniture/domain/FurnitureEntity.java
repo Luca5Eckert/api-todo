@@ -1,5 +1,6 @@
 package com.todoapp.project.modules.furniture.domain;
 
+import com.todoapp.project.infrastructure.persistence.furniture.converter.DescriptionConverter;
 import com.todoapp.project.infrastructure.persistence.user.converter.NameConverter;
 import com.todoapp.project.modules.furniture.domain.enumerator.TypeFurniture;
 import com.todoapp.project.modules.furniture.domain.exception.description.FurnitureDescriptionException;
@@ -24,6 +25,7 @@ public class FurnitureEntity {
     @Convert(converter = NameConverter.class)
     private Name name;
 
+    @Convert(converter = DescriptionConverter.class)
     private Description description;
 
     private TypeFurniture type;
