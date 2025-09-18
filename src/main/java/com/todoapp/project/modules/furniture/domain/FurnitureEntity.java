@@ -2,13 +2,12 @@ package com.todoapp.project.modules.furniture.domain;
 
 import com.todoapp.project.infrastructure.persistence.user.converter.NameConverter;
 import com.todoapp.project.modules.furniture.domain.enumerator.TypeFurniture;
-import com.todoapp.project.modules.furniture.domain.exception.description.FurnitureBlankDescriptionException;
 import com.todoapp.project.modules.furniture.domain.exception.description.FurnitureDescriptionException;
-import com.todoapp.project.modules.furniture.domain.exception.description.FurnitureLengthDescriptionException;
 import com.todoapp.project.modules.furniture.domain.exception.estimedate.FurnitureEstimeDateException;
 import com.todoapp.project.modules.furniture.domain.exception.name.FurnitureNameException;
 import com.todoapp.project.modules.furniture.domain.exception.startdate.FurnitureStartDateException;
 import com.todoapp.project.modules.furniture.domain.exception.type.FurnitureTypeException;
+import com.todoapp.project.modules.furniture.domain.valueobject.Description;
 import com.todoapp.project.modules.user.domain.valueobjects.Name;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -25,7 +24,7 @@ public class FurnitureEntity {
     @Convert(converter = NameConverter.class)
     private Name name;
 
-    private String description;
+    private Description description;
 
     private TypeFurniture type;
 
@@ -41,7 +40,7 @@ public class FurnitureEntity {
         this.dateCreateEntity = null;
     }
 
-    public FurnitureEntity(Name name, String description, TypeFurniture type, LocalDateTime dateStartToCreate, LocalDateTime estimeDateToFinish){
+    public FurnitureEntity(Name name, Description description, TypeFurniture type, LocalDateTime dateStartToCreate, LocalDateTime estimeDateToFinish){
         this.id = -1;
         this.type = type;
         this.name = name;
@@ -61,23 +60,19 @@ public class FurnitureEntity {
 
     public void setName(Name name) {
         if(name == null){
-            throw new FurnitureNameException("The name can't not be null");
+            throw new FurnitureNameException("The name can't be null");
         }
         this.name = name;
     }
 
-    public String getDescription() {
+    public Description getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        if(description.isBlank()){
-            throw new FurnitureBlankDescriptionException("Description can't be Blank");
+    public void setDescription(Description description) {
+        if(description == null){
+            throw new FurnitureDescriptionException("The description can't be null");
         }
-        if(description.length() > 400){
-            throw new FurnitureLengthDescriptionException("Description can be max 400 words");
-        }
-
         this.description = description;
     }
 
