@@ -4,7 +4,10 @@ import com.todoapp.project.modules.furniture.aplication.dto.FurnitureCreateReque
 import com.todoapp.project.modules.furniture.domain.FurnitureEntity;
 import com.todoapp.project.modules.furniture.domain.cases.CreateFurnitureCase;
 import com.todoapp.project.modules.furniture.domain.port.FurnitureRepository;
+import jakarta.persistence.Converter;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CreateFurnitureInteractor implements CreateFurnitureCase {
 
     private final FurnitureRepository furnitureRepository;

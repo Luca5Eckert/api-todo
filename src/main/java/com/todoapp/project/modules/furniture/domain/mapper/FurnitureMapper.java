@@ -4,7 +4,10 @@ import com.todoapp.project.modules.furniture.aplication.dto.FurnitureCreateReque
 import com.todoapp.project.modules.furniture.domain.FurnitureEntity;
 import com.todoapp.project.modules.furniture.domain.valueobject.Description;
 import com.todoapp.project.modules.user.domain.valueobjects.Name;
+import jakarta.persistence.Convert;
+import org.springframework.stereotype.Component;
 
+@Component
 public class FurnitureMapper {
 
     public FurnitureEntity toEntity(FurnitureCreateRequest furnitureCreateRequest) {

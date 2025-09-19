@@ -4,7 +4,9 @@ import com.todoapp.project.modules.furniture.aplication.dto.FurnitureCreateReque
 import com.todoapp.project.modules.furniture.aplication.port.FurnitureService;
 import com.todoapp.project.modules.furniture.domain.cases.CreateFurnitureCase;
 import com.todoapp.project.modules.furniture.domain.mapper.FurnitureMapper;
+import org.springframework.stereotype.Service;
 
+@Service
 public class FurnitureServiceAdapter implements FurnitureService {
 
     private final FurnitureMapper furnitureMapper;
