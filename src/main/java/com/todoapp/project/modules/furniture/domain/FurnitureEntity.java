@@ -14,6 +14,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Entity
 public class FurnitureEntity {
@@ -33,16 +34,16 @@ public class FurnitureEntity {
     @CreationTimestamp
     private final LocalDateTime dateCreateEntity;
 
-    private LocalDateTime dateStartToCreate;
+    private OffsetDateTime dateStartToCreate;
 
-    private LocalDateTime estimeDateToFinish;
+    private OffsetDateTime estimeDateToFinish;
 
     public FurnitureEntity() {
         this.id = -1;
         this.dateCreateEntity = null;
     }
 
-    public FurnitureEntity(Name name, Description description, TypeFurniture type, LocalDateTime dateStartToCreate, LocalDateTime estimeDateToFinish){
+    public FurnitureEntity(Name name, Description description, TypeFurniture type, OffsetDateTime  dateStartToCreate, OffsetDateTime  estimeDateToFinish){
         this.id = -1;
         this.type = type;
         this.name = name;
@@ -93,11 +94,11 @@ public class FurnitureEntity {
         return dateCreateEntity;
     }
 
-    public LocalDateTime getDateStartToCreate() {
+    public OffsetDateTime getDateStartToCreate() {
         return dateStartToCreate;
     }
 
-    public void setDateStartToCreate(LocalDateTime dateStartToCreate) {
+    public void setDateStartToCreate(OffsetDateTime dateStartToCreate) {
         if(dateStartToCreate == null){
             throw new FurnitureEstimeDateException("The start date can't be null");
         }
@@ -107,11 +108,11 @@ public class FurnitureEntity {
         this.dateStartToCreate = dateStartToCreate;
     }
 
-    public LocalDateTime getEstimeDateToFinish() {
+    public OffsetDateTime getEstimeDateToFinish() {
         return estimeDateToFinish;
     }
 
-    public void setEstimeDateToFinish(LocalDateTime estimeDateToFinish) {
+    public void setEstimeDateToFinish(OffsetDateTime estimeDateToFinish) {
         if(estimeDateToFinish == null){
             throw new FurnitureEstimeDateException("The estime date can't be null");
         }

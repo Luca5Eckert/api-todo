@@ -11,7 +11,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
 @Entity
@@ -34,10 +34,10 @@ public class UserEntity {
     private TypeUser type;
 
     @CreatedDate
-    private final LocalDateTime createAt;
+    private final OffsetDateTime createAt;
 
     @UpdateTimestamp
-    private LocalDateTime updateAt;
+    private OffsetDateTime updateAt;
 
     @Version
     private long version;
@@ -54,7 +54,7 @@ public class UserEntity {
         this.version = -1;
     }
 
-    public UserEntity(long id, Name name, Email email, Password password, TypeUser type, LocalDateTime createAt, LocalDateTime updateAt, long version) {
+    public UserEntity(long id, Name name, Email email, Password password, TypeUser type, OffsetDateTime  createAt, OffsetDateTime  updateAt, long version) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -72,8 +72,8 @@ public class UserEntity {
         this.email = email;
         this.password = password;
         this.type = typeUser;
-        this.createAt = LocalDateTime.now();
-        this.updateAt = LocalDateTime.now();
+        this.createAt = OffsetDateTime.now();
+        this.updateAt = OffsetDateTime.now();
     }
 
     public UserEntity(long userId) {
@@ -141,15 +141,15 @@ public class UserEntity {
         this.type = type;
     }
 
-    public LocalDateTime getCreateAt() {
+    public OffsetDateTime getCreateAt() {
         return createAt;
     }
 
-    public LocalDateTime getUpdateAt() {
+    public OffsetDateTime getUpdateAt() {
         return updateAt;
     }
 
-    public void setUpdateAt(LocalDateTime updateAt) {
+    public void setUpdateAt(OffsetDateTime updateAt) {
         this.updateAt = updateAt;
     }
 
